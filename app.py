@@ -25,7 +25,12 @@ api = Keitaro(api_key, host)
 
 # Create new offer
 new_offer = {
-    'name': f'test_offer{random.randint(0, 99999)}'
+    'name': f'test_offer{random.randint(0, 99999)}',
+    'affiliate_network_id': 79,
+    'action_payload': 'https://cpa.afffarm.com/click?pid=1671&offer_id=58689',
+    'payout_currency': 'USD',
+    'payout_value': 322,
+    'country': 'RU'
 }
 test_offer = api.offers.create(new_offer)
 print(test_offer)

@@ -49,6 +49,8 @@ class APIEndpoint:
         resource_model=None
     ):
         # Parse values with default one
+        if resource:
+            resource = self.model(resource).props
         return self.request(
             'POST',
             resource,

@@ -5,8 +5,11 @@ class Model:
     def __init__(self):
         self.valid_properties = {}
 
-    def parse_props(self):
-        pass
+    def parse_props(self, props, model):
+        for key, value in props.items():
+            if key in model.valid_properties.keys():
+                self.valid_properties[key] = value
+        return self.valid_properties
 
 
 class Offer(Model):
@@ -28,8 +31,5 @@ class Offer(Model):
         'archive': None
     }
 
-    def __init__(self, props: dict):
-        # parse given keys and values:
-        # if key exists in Offer.valid_properties then add key and value to self.valid_properties
-        # if in Offer.valid_properties no given key then do nothing
-        pass
+    def __init__(self, props):
+        self.props = self.parse_props(props, self)

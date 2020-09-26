@@ -10,8 +10,7 @@ class API(APIEndpoint):
         return super(API, self).get(resource_id=offer_id)
 
     def create(self, offer):
-        return super(API, self).post(
-            resource=offer, resource_model=Offer)
+        return super(API, self).post(offer)
 
     def clone(self, offer_id):
         return super(API, self).post(
