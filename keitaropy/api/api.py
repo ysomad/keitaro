@@ -59,8 +59,10 @@ class APIEndpoint:
             resource_model
         )
 
-    def put(self, resource):
-        return self.request('PUT', resource)
+    def put(self, resource_id, resource):
+        if resource:
+            resource = self.model(resource).props
+        return self.request('PUT', resource_id=resource_id, payload=resource)
 
     def delete(self, resource_id, resource_action=None):
         return self.request(

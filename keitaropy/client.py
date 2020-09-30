@@ -28,3 +28,4 @@ class Keitaro:
 
         # Init components
         self.offers = offers.API(self.client)
+        self.campaigns = campaigns.API(self.client)

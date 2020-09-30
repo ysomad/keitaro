@@ -1,4 +1,5 @@
-from datetime import datetime
+import random
+import string
 
 
 class Model:
@@ -10,6 +11,12 @@ class Model:
             if key in model.valid_properties.keys():
                 self.valid_properties[key] = value
         return self.valid_properties
+
+    @staticmethod
+    def generate_alias(length,
+        chars=string.ascii_letters + string.digits
+    ):
+        return ''.join(random.choice(chars) for x in range(length))
 
 
 class Offer(Model):
@@ -32,4 +39,28 @@ class Offer(Model):
     }
 
     def __init__(self, props):
-        self.props = self.parse_props(props, self)
+        self.model = super()
+        self.props = self.model.parse_props(props, self)
+
+
+class Campaign(Model):
+    valid_properties = {
+        'alias': Model.generate_alias(8),
+        'name': None,
+        'type': None,
+        'cookies_ttl': None,
+        'position': None,
+        'state': None,
+        'cost_type': None,
+        'cost_value': None,
+        'cost_currency': None,
+        'group_id': None,
+        'bind_visitors': None,
+        'traffic_source_id': None,
+        'token': None,
+        'cost_auto': True
+    }
+
+    def __init__(self, props):
+        self.model = super()
+        self.props = self.model.parse_props(props, self)
