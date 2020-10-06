@@ -2,6 +2,7 @@ from keitaropy import Keitaro
 
 import json
 import random
+import requests
 
 import os
 from dotenv import load_dotenv
@@ -25,7 +26,7 @@ api = Keitaro(api_key, host)
 
 # # Create new offer
 # new_offer = {
-#     'name': f'test_offer{random.randint(0, 99999)}',
+#     'name': 123,
 #     'affiliate_network_id': 79,
 #     'action_payload': 'https://cpa.afffarm.com/click?pid=1671&offer_id=58689',
 #     'payout_currency': 'USD',
@@ -106,3 +107,77 @@ api = Keitaro(api_key, host)
 # Restore campaign
 # restored_campaign = api.campaigns.restore(1133)
 # print(restored_campaign)
+
+
+# Get campaign streams
+# campaign_streams = api.streams.get_campaign_streams(1072)
+# print(campaign_streams)
+
+
+# # Get stream by id
+# stream = api.streams.get(1114)
+# print(stream)
+
+# # Get deleted streams
+# deleted_streams = api.streams.get_deleted()
+# print(deleted_streams)
+
+# Restore stream
+# restored_stream = api.streams.restore(1166)
+# print(restored_stream)
+
+# Create stream
+
+
+# Enable Stream
+
+
+# # Disable Stream
+# disabled_stream = api.streams.disable(1114)
+# print(disabled_stream)
+
+
+# # Test
+# campaign_streams = api.streams.get_campaign_streams(1072)
+# print(campaign_streams)
+
+# enable = api.streams.enable(1114)
+# disable = api.streams.disable(1114)
+
+
+# disabled = requests.post(
+#     url = host + '/streams/1114/enable',
+#     headers={'Api-Key': api_key}
+# )
+# print(disabled.json())
+
+
+# # Create stream
+# stream = {
+#     'campaign_id': 1072,
+#     'offers': [
+#         {
+#             'offer_id': 896
+#         }
+#     ]
+# }
+# created_stream = api.streams.create(stream)
+# print(created_stream)
+
+
+# move to archive
+# deleted_stream = api.streams.delete(1181)
+# print(deleted_stream)
+
+
+# Update stream
+# updated_stream = api.streams.update(1181, {'state': 'active'})
+# print(updated_stream)
+
+
+# Get affiliate network
+
+
+
+# print(requests.delete(host+'/groups/123/delete', headers={'Api-Key': api_key}))
+

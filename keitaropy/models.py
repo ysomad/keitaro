@@ -6,11 +6,23 @@ class Model:
     def __init__(self):
         self.valid_properties = {}
 
-    def parse_props(self, props, model):
+    def parse_props(self, props, child):
+        result = child.valid_properties.copy()
         for key, value in props.items():
-            if key in model.valid_properties.keys():
-                self.valid_properties[key] = value
-        return self.valid_properties
+            if key in child.valid_properties.keys():
+                result[key] = value
+        return self.remove_none_values(result)
+
+    def remove_none_values(self, dictionary):
+        result = {}
+        for key, value in dictionary.items():
+            if isinstance(value, dict):
+                nested = self.remove_none_values(value)
+                if len(nested.keys()) > 0:
+                    result[key] = nested
+            elif value is not None:
+                result[key] = value
+        return result
 
     @staticmethod
     def generate_alias(length,
@@ -59,6 +71,66 @@ class Campaign(Model):
         'traffic_source_id': None,
         'token': None,
         'cost_auto': True
+    }
+
+    def __init__(self, props):
+        self.model = super()
+        self.props = self.model.parse_props(props, self)
+
+
+class Stream(Model):
+    valid_properties = {
+        'type': 'regular',
+        'name': 'Stream ' + Model.generate_alias(8),
+        'campaign_id': None,
+        'position': None,
+        'chance': None,
+        'action_options': None,
+        'comments': None,
+        'state': 'active',
+        'action_type': 'http',
+        'action_payload': None,
+        'schema': 'landings',
+        'collect_clicks': True,
+        'filter_or': False,
+        'offers': [
+            {
+                'id': None,
+                'stream_id': None,
+                'offer_id': None,
+                'state': None,
+                'share': 100,
+            }
+        ],
+    }
+
+    def __init__(self, props):
+        self.model = super()
+        self.props = self.model.parse_props(props, self)
+
+
+class AffNetwork(Model):
+    valid_properties = {
+        'name': None,
+        'postback_url': None,
+        'offer_param': None,
+        'state': None,
+        'template_name': None,
+        'notes': None,
+        'pull_api_options': None,
+        'offers': None
+    }
+
+    def __init__(self, props):
+        self.model = super()
+        self.props = self.model.parse_props(props, self)
+
+
+class Group(Model):
+    valid_properties = {
+        'name': None,
+        'position': None,
+        'type': 'campaigns'
     }
 
     def __init__(self, props):
