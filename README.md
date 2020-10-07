@@ -23,6 +23,9 @@ from keitaropy import Keitaro
 api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 ```
 
+## ⚙ What can it do
+All keitaropy functionality is presented in the [google sheet](https://docs.google.com/spreadsheets/d/1XqRT8XuUG3XfI8GnJMfEKezJmI_3_MllDNermPeUCqA/edit#gid=0)
+
 ## 📚 Examples
 If request is successfully sent, a response will be received. You can see it by simply printing it in console
 ```python
