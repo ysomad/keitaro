@@ -15,14 +15,14 @@ class APIEndpoint:
     def request(
         self,
         method,
-        param=None,
-        param_value=None,
         payload=None,
         resource_id=None,
         resource_action=None,
         resource_model=None,
         single_resource=False,
-        endpoint=None
+        endpoint=None,
+        param=None,
+        param_value=None,
     ):
         if not endpoint:
             endpoint = self.endpoint
@@ -39,23 +39,23 @@ class APIEndpoint:
 
     def get(
         self,
-        param=None,
-        param_value=None,
         resource_id=None,
         resource_action=None,
         resource_model=None,
         single_resource=False,
-        endpoint=None
+        endpoint=None,
+        param=None,
+        param_value=None
     ):
         return self.request(
             'GET',
-            param=param,
-            param_value=param_value,
             resource_id=resource_id,
             resource_action=resource_action,
             resource_model=resource_model,
             single_resource=single_resource,
-            endpoint=endpoint
+            endpoint=endpoint,
+            param=param,
+            param_value=param_value
         )
 
     def post(

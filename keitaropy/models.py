@@ -51,8 +51,7 @@ class Offer(Model):
     }
 
     def __init__(self, props):
-        self.model = super()
-        self.props = self.model.parse_props(props, self)
+        self.props = super().parse_props(props, self)
 
 
 class Campaign(Model):
@@ -74,8 +73,7 @@ class Campaign(Model):
     }
 
     def __init__(self, props):
-        self.model = super()
-        self.props = self.model.parse_props(props, self)
+        self.props = super().parse_props(props, self)
 
 
 class Stream(Model):
@@ -105,8 +103,7 @@ class Stream(Model):
     }
 
     def __init__(self, props):
-        self.model = super()
-        self.props = self.model.parse_props(props, self)
+        self.props = super().parse_props(props, self)
 
 
 class AffNetwork(Model):
@@ -122,8 +119,7 @@ class AffNetwork(Model):
     }
 
     def __init__(self, props):
-        self.model = super()
-        self.props = self.model.parse_props(props, self)
+        self.props = super().parse_props(props, self)
 
 
 class Group(Model):
@@ -134,5 +130,58 @@ class Group(Model):
     }
 
     def __init__(self, props):
-        self.model = super()
-        self.props = self.model.parse_props(props, self)
+        self.props = super().parse_props(props, self)
+
+
+class Source(Model):
+    valid_properties = {
+        'name': None,
+        'postback_url': None,
+        'postback_statuses': ['sale', 'lead'],
+        'template_name': None,
+        'accept_parameters': True,
+        'parameters': {
+            'keyword': {
+                'name': 'keyword',
+                'placeholder': None,
+                'alias': None
+            },
+            'cost': {
+                'name': 'cost',
+                'placeholder': None,
+                'alias': None
+            },
+            'currency': {
+                'name': 'currency',
+                'placeholder': None,
+                'alias': None
+            },
+            'external_id': {
+                'name': 'external_id',
+                'placeholder': '{userid}',
+                'alias': None
+            },
+            'creative_id': {
+                'name': 'creative_id',
+                'placeholder': None,
+                'alias': None
+            },
+            'ad_campaign_id': {
+                'name': 'ad_campaign_id',
+                'placeholder': None,
+                'alias': None
+            },
+            'source': {
+                'name': 'source',
+                'placeholder': None,
+                'alias': None
+            }
+        },
+        'notes': None,
+        'state': 'active',
+        'traffic_loss': 0,
+        'update_in_campaigns': None
+    }
+
+    def __init__(self, props):
+        self.props = super().parse_props(props, self)

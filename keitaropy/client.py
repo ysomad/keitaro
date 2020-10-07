@@ -1,6 +1,6 @@
 import requests
 
-from .api import offers, campaigns, streams, affnetworks, groups
+from .api import offers, campaigns, streams, affnetworks, groups, sources
 
 
 class KeitaroClient:
@@ -15,7 +15,6 @@ class KeitaroClient:
     def execute(self, method, path, **kwargs):
         url = self.host + path
         kwargs.update(self.client_kwargs)
-        print(url)
         response = requests.request(
             method, url,
             headers={'Api-Key': self.api_key}, **kwargs)
@@ -30,3 +29,4 @@ class Keitaro:
         self.streams = streams.API(self.client)
         self.affnetworks = affnetworks.API(self.client)
         self.groups = groups.API(self.client)
+        self.sources = sources.API(self.client)

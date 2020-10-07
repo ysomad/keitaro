@@ -20,5 +20,4 @@ class API(APIEndpoint):
         return super(API, self).put(offer_id, offer)
 
     def delete(self, offer_id: int):
-        return super(API, self).delete(
-            resource_id=offer_id, resource_action='archive')
+        return super(API, self).delete(offer_id, 'archive')
