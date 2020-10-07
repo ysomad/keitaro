@@ -101,7 +101,7 @@ As a result you'll get response in JSON format
   </p>
 </details>
 
-### Campaigns
+### Campaign creation
 To create an advertising campaign, you can simply call create() method of the campaigns resource
 ```python
 payload = {
