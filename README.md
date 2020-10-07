@@ -1,24 +1,39 @@
 # keitaropy
-keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
-## 📄 Official Keitaro resources
-* [Keitaro Website](https://keitaro.io/)
-* [Admin API documentation](https://admin-api.docs.keitaro.io/)
-* [Technical Support](https://t.me/keitarobot)
 
-## ❔ Why should you use it
-* allows to use multiple trackers in one solution
-* no need knowledge of http requests
-* incredibly easy to use
-* follows the paradigm "write once, run everywhere"
+keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
+
+# 📖 keitaropy resorces
+
+-   [Source code](https://github.com/Infvmous/keitaropy/tree/master/keitaropy)
+-   [PyPI](https://pypi.org/project/keitaropy/)
+
+## 📄 Official Keitaro resources
+
+-   [Keitaro Website](https://keitaro.io/)
+-   [Admin API documentation](https://admin-api.docs.keitaro.io/)
+-   [Technical Support](https://t.me/keitarobot)
+
+## ❔ Why should you use keitaropy
+
+-   allows to use multiple trackers in one solution
+-   no need knowledge of http requests
+-   incredibly easy to use
+-   follows the paradigm "write once, run everywhere"
 
 ## 📖 Getting Started
+
 ### Installation
+
 To install you need to have [pip](https://pip.pypa.io/en/stable/installing/) installed
+
 ```
 pip install keitaropy
 ```
+
 ### Keitaro tracker initialization
+
 Begin by importing Keitaro class from keitaropy module and passing API key and URL to it
+
 ```python
 from keitaropy import Keitaro
 
@@ -26,14 +41,18 @@ api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 ```
 
 ## ⚙ What can it do
+
 All keitaropy functionality is presented in [Google Sheet](https://docs.google.com/spreadsheets/d/1XqRT8XuUG3XfI8GnJMfEKezJmI_3_MllDNermPeUCqA/edit#gid=0)
 
 ## 📚 Examples
+
 If request is successfully sent, a response will be received. You can see it simply by printing it in console
+
 ```python
 affnetwork = api.affnetworks.delete(14)
 print(affnetwork)
 ```
+
 <details>
   <summary>
     <i>Click to see a response sample</i>
@@ -58,6 +77,7 @@ print(affnetwork)
 </details>
 
 ### Get all offers or specific one
+
 To get all offers call get() method without any arguments
 
 ```python
@@ -65,10 +85,13 @@ all_offers = api.offers.get()
 ```
 
 Let's try to get a specific offer by its id
+
 ```python
 dummy_offer = api.offers.get(21)
 ```
+
 As a result you'll get a response in JSON format
+
 <details>
   <summary>
     <i>Click to see a response sample</i>
@@ -103,7 +126,9 @@ As a result you'll get a response in JSON format
 </details>
 
 ### Campaign creation
+
 To create an advertising campaign, you can simply call create() method of the campaigns resource
+
 ```python
 payload = {
   'name': 'Dummy campaign',
@@ -116,5 +141,3 @@ payload = {
 
 campaign = api.campaigns.create(payload)
 ```
-
-
