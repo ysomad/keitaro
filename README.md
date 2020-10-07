@@ -9,6 +9,7 @@ keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://
 * allows to use multiple trackers in one solution
 * no need knowledge of http requests
 * incredibly easy to use
+* follows the paradigm "write once, run everywhere"
 
 ## 📖 Getting Started
 ### Installation
