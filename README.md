@@ -3,6 +3,7 @@ keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://
 ## 📄 Official Keitaro resources
 * [Keitaro Website](https://keitaro.io/)
 * [Admin API documentation](https://admin-api.docs.keitaro.io/)
+* [Technical Support](https://t.me/keitarobot)
 
 ## ❔ Why should you use keitaropy
 * allows to use multiple trackers in one solution
@@ -24,7 +25,7 @@ api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 ```
 
 ## ⚙ What can it do
-All keitaropy functionality is presented in the [google sheet](https://docs.google.com/spreadsheets/d/1XqRT8XuUG3XfI8GnJMfEKezJmI_3_MllDNermPeUCqA/edit#gid=0)
+All keitaropy functionality is presented in [Google Sheet](https://docs.google.com/spreadsheets/d/1XqRT8XuUG3XfI8GnJMfEKezJmI_3_MllDNermPeUCqA/edit#gid=0)
 
 ## 📚 Examples
 If request is successfully sent, a response will be received. You can see it by simply printing it in console
