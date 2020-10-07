@@ -3,13 +3,11 @@ keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://
 ## 📄 Official Keitaro resources
 * [Keitaro Website](https://keitaro.io/)
 * [Admin API documentation](https://admin-api.docs.keitaro.io/)
-<br />
 
 ## ❔ Why should you use keitaropy
 * allows to use multiple trackers in one solution
 * no need knowledge of http requests
 * incredibly easy to use
-<br />
 
 ## 📖 Getting Started
 ### Installation
@@ -22,15 +20,13 @@ Begin by importing Keitaro class from keitaropy module and passing API key and U
 ```python
 from keitaropy import Keitaro
 
-
 api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 ```
-<br />
 
 ## 📚 Examples
 If request is successfully sent, a response will be received. You can see it by simply printing it in console
-```
-affnetwork = app.affnetworks.delete(14)
+```python
+affnetwork = api.affnetworks.delete(14)
 print(affnetwork)
 ```
 <details>
@@ -58,7 +54,7 @@ print(affnetwork)
 
 ### Offers
 Let's try to get a specific offer by its id
-```
+```python
 dummy_offer = api.offers.get(21)
 ```
 As a result you'll get response in JSON format
@@ -97,7 +93,7 @@ As a result you'll get response in JSON format
 
 ### Campaigns
 To create an advertising campaign, you can simply call create() method of the campaigns resource
-```
+```python
 payload = {
   'name': 'Dummy campaign',
   'state': 'disabled',
