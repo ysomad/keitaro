@@ -18,12 +18,11 @@ To install you need to have [pip](https://pip.pypa.io/en/stable/installing/) ins
 pip install keitaropy
 ```
 ### Keitaro tracker initialization
-Begin by importing Keitaro class from keitaropy module
-```
+Begin by importing Keitaro class from keitaropy module and passing API key and URL to it
+```python
 from keitaropy import Keitaro
-```
-To initialize the tracker you need to pass API key and URL to Keitaro class
-```
+
+
 api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 ```
 <br />
