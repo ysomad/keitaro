@@ -4,12 +4,14 @@ from .api import offers, campaigns, streams, affnetworks, groups, sources
 
 
 class KeitaroClient:
+    api_endpoint = 'admin_api/v1/'
+
     def __init__(self, api_key, host, **kwargs):
         self.api_key = api_key
         if host.endswith('/'):
-            self.host = host
+            self.host = host + KeitaroClient.api_endpoint
         else:
-            self.host = host + '/'
+            self.host = f'{host}/{KeitaroClient.api_endpoint}'
         self.client_kwargs = kwargs
 
     def execute(self, method, path, **kwargs):

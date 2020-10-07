@@ -23,7 +23,7 @@ setup(
     keywords='keitaro api requests api-wrapper api-client python python3 admin-api',
     project_urls={
         'Source Code': 'https://github.com/Infvmous/keitaropy/tree/master/keitaropy',
-        'Documentation': 'https://github.com/Infvmous/keitaropy/blob/master/README.md',
+        'Documentation': 'https://github.com/Infvmous/keitaropy#-getting-started',
         'Keitaro Admin API Documentation': 'https://admin-api.docs.keitaro.io/'
     },
     classifiers=[
