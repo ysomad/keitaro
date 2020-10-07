@@ -67,7 +67,7 @@ Let's try to get a specific offer by its id
 ```python
 dummy_offer = api.offers.get(21)
 ```
-As a result you'll get response in JSON format
+As a result you'll get a response in JSON format
 <details>
   <summary>
     <i>Click to see a response sample</i>
