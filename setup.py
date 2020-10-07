@@ -6,15 +6,13 @@ with open("README.md", "r", encoding="utf8") as fh:
 
 setup(
     name='keitaropy',
-    version='0.1',
-    packages=find_packages(),
-    install_requires=[
-        'requests'
-    ],
+    version='0.1.6',
+    packages=find_packages(exclude=['tests']),
+    install_requires=['requests'],
     package_data={
         '': ['*.py']
     },
-    author='Alex M',
+    author='Alex Malykh',
     author_email='alexeyheather@gmail.com',
     description='Simple and easy to use API wrapper library for Keitaro Admin API written in Python3 and requests',
     long_description=long_description,
@@ -31,5 +29,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.8'
+    python_requires='>=3.8',
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest>=6.1.1'],
+    test_suite='tests',
 )

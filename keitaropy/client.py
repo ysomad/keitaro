@@ -17,6 +17,7 @@ class KeitaroClient:
     def execute(self, method, path, **kwargs):
         url = self.host + path
         kwargs.update(self.client_kwargs)
+        print(url)
         response = requests.request(
             method, url,
             headers={'Api-Key': self.api_key}, **kwargs)

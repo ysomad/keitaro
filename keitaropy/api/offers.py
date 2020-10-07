@@ -52,13 +52,13 @@ class API(APIEndpoint):
         """
         return super(API, self).put(offer_id, offer)
 
-    def delete(self, offer_id: int) -> dict:
+    def delete(self, offer_id: int) -> list:
         """Deleting offer by its id
 
         Args:
             offer_id (int): Offer id
 
         Returns:
-            dict: Deleted offer data
+            list: Deleted offer data
         """
         return super(API, self).delete(offer_id, 'archive')

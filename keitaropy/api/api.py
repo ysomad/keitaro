@@ -1,3 +1,6 @@
+import json
+
+
 class APIEndpoint:
     def __init__(self, api, endpoint=None, model=None):
         self.api = api
@@ -34,7 +37,7 @@ class APIEndpoint:
             endpoint = self.build_url(endpoint, resource_action)
         if param and param_value:
             endpoint = self.add_param(endpoint, param, param_value)
-        response = self.api.execute(method, endpoint, data=payload)
+        response = self.api.execute(method, endpoint, data=json.dumps(payload))
         return response.json()
 
     def get(
