@@ -2,7 +2,7 @@
 
 keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
 
-# 📖 keitaropy resorces
+## 📖 Project links
 
 -   [Source code](https://github.com/Infvmous/keitaropy/tree/master/keitaropy)
 -   [PyPI](https://pypi.org/project/keitaropy/)
