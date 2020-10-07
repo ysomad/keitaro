@@ -28,7 +28,7 @@ api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
 All keitaropy functionality is presented in [Google Sheet](https://docs.google.com/spreadsheets/d/1XqRT8XuUG3XfI8GnJMfEKezJmI_3_MllDNermPeUCqA/edit#gid=0)
 
 ## 📚 Examples
-If request is successfully sent, a response will be received. You can see it by simply printing it in console
+If request is successfully sent, a response will be received. You can see it simply by printing it in console
 ```python
 affnetwork = api.affnetworks.delete(14)
 print(affnetwork)
