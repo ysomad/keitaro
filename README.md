@@ -5,7 +5,7 @@ keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://
 * [Admin API documentation](https://admin-api.docs.keitaro.io/)
 * [Technical Support](https://t.me/keitarobot)
 
-## ❔ Why should you use keitaropy
+## ❔ Why should you use it
 * allows to use multiple trackers in one solution
 * no need knowledge of http requests
 * incredibly easy to use
