@@ -56,7 +56,13 @@ print(affnetwork)
   </p>
 </details>
 
-### Offers
+### Get all offers or specific one
+To get all offers call get() method without any arguments
+
+```python
+all_offers = api.offers.get()
+```
+
 Let's try to get a specific offer by its id
 ```python
 dummy_offer = api.offers.get(21)
