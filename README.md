@@ -106,6 +106,7 @@ payload = {
   'cost_currency': 'USD',
   'cost_auto': True
 }
+
 campaign = api.campaigns.create(payload)
 ```
 
