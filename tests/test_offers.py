@@ -1,15 +1,7 @@
 import random
 
-from keitaro import api
+from keitaro import api, get_random_id, generate_name
 from keitaropy.models import Model
-
-
-def get_random_id():
-    return random.randint(1, len(api.offers.get()))
-
-
-def generate_name():
-    return 'test_' + Model.generate_alias(8)
 
 
 def test_get():
@@ -32,6 +24,7 @@ def test_create():
         'group_id': group_id
     }
     response = api.offers.create(payload)
+    assert isinstance(response, dict)
     assert response['name'] == name
     assert response['group_id'] == group_id
 
@@ -43,6 +36,7 @@ def test_delete():
     }
     created_offer = api.offers.create(payload)
     response = api.offers.delete(created_offer['id'])
+    assert isinstance(response, list)
     assert response[0]['id'] == int(created_offer['id'])
     assert response[0]['state'] == 'deleted'
 
@@ -64,6 +58,7 @@ def test_update():
         'action_payload': updated_action_payload
     }
     response = api.offers.update(created_offer['id'], payload)
+    assert isinstance(response, dict)
     assert response['name'] == updated_name
     assert response['country'][0] == 'BH'
     assert response['action_payload'] == updated_action_payload

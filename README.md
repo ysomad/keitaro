@@ -32,12 +32,12 @@ pip install keitaropy
 
 ### Keitaro tracker initialization
 
-Begin by importing Keitaro class from keitaropy module and passing API key and URL to it
+Begin by importing Keitaro class from keitaropy module and passing Admin API key and URL of Keitaro tracker to it
 
 ```python
 from keitaropy import Keitaro
 
-api = Keitaro('Keitaro Admin API key', 'Keitaro tracker URL')
+api = Keitaro('API key', 'URL')
 ```
 
 ## ⚙ What can it do
