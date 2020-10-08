@@ -16,8 +16,8 @@ def get_random_id(resources):
     return random.choice(resources.json())['id']
 
 
-def generate_name(length=8):
-    return 'test_' + Model.generate_alias(length)
+def generate_name(test_description, length=8):
+    return f'{test_description}_{Model.generate_alias(length)}'
 
 
 

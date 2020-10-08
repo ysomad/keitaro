@@ -60,49 +60,49 @@ class API(APIEndpoint):
         """
         return super(API, self).put(campaign_id, campaign)
 
-    def delete(self, campaign_id: int) -> dict:
+    def delete(self, campaign_id: int) -> list:
         """Deleting advertising campaign
 
         Args:
             campaign_id (int): Campaign id
 
         Returns:
-            dict: Deleted campaign data
+            list: Deleted campaign data
         """
         return super(API, self).delete(campaign_id)
 
-    def disable(self, campaign_id: int) -> dict:
+    def disable(self, campaign_id: int) -> list:
         """Disabling advertising campaign
 
         Args:
             campaign_id (int): Campaign id
 
         Returns:
-            dict: Disabled campaign data
+            list: Disabled campaign data
         """
         return super(API, self).post(
             resource_id=campaign_id, resource_action='disable')
 
-    def enable(self, campaign_id: int) -> dict:
+    def enable(self, campaign_id: int) -> list:
         """Enabling advertising campaign
 
         Args:
             campaign_id (int): Campaign id
 
         Returns:
-            dict: Enabled campaign data
+            list: Enabled campaign data
         """
         return super(API, self).post(
             resource_id=campaign_id, resource_action='enable')
 
-    def restore(self, campaign_id: int) -> dict:
+    def restore(self, campaign_id: int) -> list:
         """Restoring deleted advertising campaign
 
         Args:
             campaign_id (int): Campaign id
 
         Returns:
-            dict: Restored campaign data
+            list: Restored campaign data
         """
         return super(API, self).post(
             resource_id=campaign_id, resource_action='restore')

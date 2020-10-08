@@ -6,11 +6,26 @@ class Model:
     def __init__(self):
         self.valid_properties = {}
 
+    @staticmethod
+    def generate_alias(length,
+        chars=string.ascii_letters + string.digits
+    ):
+        return ''.join(random.choice(chars) for x in range(length))
+
+    @staticmethod
+    def update_alias(props):
+        props['alias'] = Model.generate_alias(8)
+        return props
+
     def parse_props(self, props, child):
         result = child.valid_properties.copy()
         for key, value in props.items():
             if key in child.valid_properties.keys():
                 result[key] = value
+        alias = 'alias'
+        if alias in child.valid_properties.keys():
+            if child.valid_properties[alias] == result[alias]:
+                result = Model.update_alias(result)
         return self.remove_none_values(result)
 
     def remove_none_values(self, dictionary):
@@ -23,12 +38,6 @@ class Model:
             elif value is not None:
                 result[key] = value
         return result
-
-    @staticmethod
-    def generate_alias(length,
-        chars=string.ascii_letters + string.digits
-    ):
-        return ''.join(random.choice(chars) for x in range(length))
 
 
 class Offer(Model):

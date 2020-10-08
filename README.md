@@ -2,11 +2,6 @@
 
 keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
 
-## 📖 Project links
-
--   [Source code](https://github.com/Infvmous/keitaropy/tree/master/keitaropy)
--   [PyPI](https://pypi.org/project/keitaropy/)
-
 ## 📄 Official Keitaro resources
 
 -   [Keitaro Website](https://keitaro.io/)
@@ -46,11 +41,15 @@ All keitaropy functionality is presented in [Google Sheet](https://docs.google.c
 
 ## 📚 Examples
 
-If request is successfully sent, a response will be received. You can see it simply by printing it in console
+If API request was successful, status code 200 will be received and a response in the json format. `Use json()` method to see the response data
 
 ```python
+import json
+from keitaropy import Keitaro
+
+api = Keitaro('API key', 'URL')
 affnetwork = api.affnetworks.delete(14)
-print(affnetwork)
+print(affnetwork.json())
 ```
 
 <details>

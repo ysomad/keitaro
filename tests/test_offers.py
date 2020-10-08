@@ -19,7 +19,7 @@ def test_get_by_id():
 
 
 def test_create():
-    name = generate_name()
+    name = generate_name('test_create')
     group_id = 14
     payload = {
         'name': name,
@@ -35,7 +35,7 @@ def test_create():
 
 def test_delete():
     payload = {
-        'name': generate_name(),
+        'name': generate_name('test_delete'),
         'group_id': 14
     }
     created_offer = api.offers.create(payload)
@@ -49,7 +49,7 @@ def test_delete():
 
 
 def test_update():
-    name = generate_name()
+    name = generate_name('test_update')
     offer_payload = {
         'name': name,
         'country': 'GB',
