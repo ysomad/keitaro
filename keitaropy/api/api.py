@@ -38,7 +38,7 @@ class APIEndpoint:
         if param and param_value:
             endpoint = self.add_param(endpoint, param, param_value)
         response = self.api.execute(method, endpoint, data=json.dumps(payload))
-        return response.json()
+        return response
 
     def get(
         self,

@@ -1,5 +1,6 @@
 import os
 import random
+import json
 
 from dotenv import load_dotenv
 
@@ -11,8 +12,8 @@ load_dotenv()
 api = Keitaro(os.getenv('API_KEY'), os.getenv('HOST'))
 
 
-def get_random_id(resources=api.offers.get()):
-    return random.randint(1, len(resources))
+def get_random_id(resources):
+    return random.choice(resources.json())['id']
 
 
 def generate_name(length=8):

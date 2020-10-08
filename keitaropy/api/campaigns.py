@@ -36,14 +36,14 @@ class API(APIEndpoint):
         """
         return super(API, self).post(campaign)
 
-    def clone(self, campaign_id: int) -> dict:
+    def clone(self, campaign_id: int) -> list:
         """Cloning advertising campaign by its id
 
         Args:
             campaign_id (int): Campaign id
 
         Returns:
-            dict: Cloned campaign data
+            list: Cloned campaign data
         """
         return super(API, self).post(
             resource_id=campaign_id, resource_action='clone')
