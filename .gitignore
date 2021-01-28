@@ -1,10 +1,10 @@
 .eggs
 .pytest_cache
 .vscode
-keitaropy.egg-info
+keitaro.egg-info
 env
 __main__.py
 __pycache__
-keitaropy/__pycache__
-keitaropy/api/__pycache__
+keitaro/__pycache__
+keitaro/resources/__pycache__
 setenv.sh
