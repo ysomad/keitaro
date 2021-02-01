@@ -1,7 +1,7 @@
 import json
 from requests import request
 
-from .resources import Affiliate, Campaign, Offer, Stream
+from .resources import Affiliate, Campaign, Offer, Stream, Landing
 
 
 class Client:
@@ -40,3 +40,4 @@ class Keitaro:
         self.campaign = Campaign(self.client)
         self.offer = Offer(self.client)
         self.stream = Stream(self.client)
+        self.landing = Landing(self.client)
