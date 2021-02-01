@@ -38,3 +38,13 @@ def random_campaign(all_campaigns):
 @pytest.fixture
 def all_deleted_campaigns(api):
     return api.campaign.deleted()
+
+
+@pytest.fixture
+def all_offers(api):
+    return api.offer.get()
+
+
+@pytest.fixture
+def random_offer(all_offers):
+    return random.choice(all_offers.json())
