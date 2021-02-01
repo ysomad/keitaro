@@ -1,20 +1,35 @@
-def test_get_all(keitaro_test_client):
-    response = keitaro_test_client.campaign.get()
-    assert response.status_code == 200
-    assert isinstance(response, list)
+import json
 
 
-def test_get_by_id(keitaro_test_client, random_campaign):
+def test_get_all(all_campaigns):
+    json = all_campaigns.json()
+    assert all_campaigns.status_code == 200
+    assert isinstance(json, list)
+
+
+def test_get_by_id(api, random_campaign):
     random_campaign_id = random_campaign['id']
-    response = keitaro_test_client.campaign.get(random_campaign_id)
-    assert response.status_code == 200
-    assert isinstance(response, dict)
-    assert response['id'] == random_campaign_id
+    res = api.campaign.get(random_campaign_id)
+    json = res.json()
+    assert res.status_code == 200
+    assert isinstance(json, dict)
+    assert json['id'] == random_campaign_id
 
 
-def test_get_deleted(keitaro_test_client):
-    response = keitaro_test_client.campaign.get_deleted()
-    assert response.status_code == 200
-    assert isinstance(response, list)
-    for campaign in response:
-        assert campaign['state'] == 'deleted'
+def test_get_deleted(all_deleted_campaigns):
+    json == all_deleted_campaigns
+    assert all_deleted_campaigns.status_code == 200
+    assert isinstance(json, list)
+    for campaign in json:
+        assert json['state'] == 'deleted'
+
+
+def test_get_streams():
+    # TODO: write tests for getting streams of campaign
+    raise NotImplementedError
+
+
+
+
+
+

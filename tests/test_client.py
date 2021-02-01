@@ -1,18 +1,10 @@
-import keitaro
-import pytest
-
-from os import getenv
-
-
-def test_client(env_var_names):
-    api_key = getenv(env_var_names[0])
-    host = getenv(env_var_names[1])
-    api = keitaro.init(api_key, host)
-    assert api_key == api.client.api_key
-    assert host == api.client.host
+def test_client(api, env_vars):
+    assert api.client.api_key == env_vars['api_key']
+    assert api.client.host == env_vars['host']
+    # TODO: add more tests
 
 
-def test_env_client(env_var_names):
-    api = keitaro.init(env_var_names[0], env_var_names[1], True)
-    assert getenv(env_var_names[0]) == api.client.api_key
-    assert getenv(env_var_names[1]) == api.client.host
+def test_env_client(env_api, env_vars):
+    assert env_api.client.api_key == env_vars['api_key']
+    assert env_api.client.host == env_vars['host']
+    # TODO: add more tests
