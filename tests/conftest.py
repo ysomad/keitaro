@@ -1,6 +1,8 @@
-import pytest
 import keitaro
+
+import pytest
 import random
+import json
 
 
 API_KEY = 'API_KEY'
@@ -23,4 +25,14 @@ def keitaro_test_client():
 
 @pytest.fixture()
 def random_affiliate():
-    return random.choice(get_keitaro_client().affiliate.get())
+    return random.choice(get_keitaro_client().affiliate.get().json())
+
+
+@pytest.fixture()
+def random_campaign():
+    return random.choice(get_keitaro_client().campaign.get().json())
+
+
+@pytest.fixture()
+def random_offer():
+    return random.choice(get_keitaro_client().offer.get().json())

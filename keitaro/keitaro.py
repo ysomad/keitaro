@@ -1,7 +1,7 @@
 import json
 from requests import request
 
-from .resources import Affiliate, Campaign, Offer
+from .resources import Affiliate, Campaign, Offer, Stream
 
 
 class Client:
@@ -29,9 +29,8 @@ class Client:
     def send_request(self, method, endpoint, **kwargs):
         url = self.api_url + endpoint
         print(f'{method} {url}')
-        response = request(method, url, headers={'Api-Key': self.api_key},
-            **kwargs)
-        return response.json()
+        return request(method, url, headers={'Api-Key': self.api_key},
+                **kwargs)
 
 
 class Keitaro:
@@ -39,3 +38,5 @@ class Keitaro:
         self.client = Client(api_key, host, env)
         self.affiliate = Affiliate(self.client)
         self.campaign = Campaign(self.client)
+        self.offer = Offer(self.client)
+        self.stream = Stream(self.client)

@@ -7,20 +7,25 @@ class API:
         self.client = client
         self.resource_endpoint = resource_endpoint
 
+    def set_resource_endpoint(self, resource_endpoint):
+        self.resource_endpoint = resource_endpoint
+
     def _build_endpoint(self, *path_params):
-        return '/'.join(str(p).rstrip('/') for p in path_params if p)
+        print(f'Path params: {path_params}')
+        return '/'.join(str(p).rstrip('/') for p in path_params)
 
-    def _build_payload(self):
-        return {'payload': None}
+    def _build_payload(self, **query_params):
+        print(f'Payload: {query_params}')
+        return query_params
 
-    def _prepare_request(self, method, *path_params):
+    def _prepare_request(self, method, *path_params, **query_params):
         endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
-        payload = self._build_payload()
+        payload = self._build_payload(**query_params)
         return self.client.send_request(method, endpoint,
             data=json.dumps(payload))
 
-    def get(self, *path_params):
-        return self._prepare_request('GET', *path_params);
+    def get(self, *path_params, **query_params):
+        return self._prepare_request('GET', *path_params, **query_params);
 
     def post(self, resource_instance, *args):
         return self._prepare_request('POST')

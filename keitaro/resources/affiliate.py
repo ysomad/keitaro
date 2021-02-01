@@ -2,9 +2,10 @@ from keitaro.api import API
 
 
 class Affiliate(API):
+    endpoint = 'affiliate_networks'
 
-    def __init__(self, client, endpoint='affiliate_networks'):
-        super(Affiliate, self).__init__(client, endpoint)
+    def __init__(self, client): 
+        super(Affiliate, self).__init__(client, Affiliate.endpoint)
 
     def __str__(self):
         return 'https://admin-api.docs.keitaro.io/#tag/Affiliate-Networks'
