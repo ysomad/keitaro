@@ -8,13 +8,7 @@ class Stream(API):
     def __init__(self, client):
         super(Stream, self).__init__(client, Stream.endpoint)
 
-    def get(self, campaign_id):
-        """Getting stream of campaign by campaign id"""
-        api = super(Stream, self)
-        api.set_resource_endpoint(Campaign.endpoint)
-        return api.get(campaign_id, Stream.endpoint)
-
-    def get_one(self, stream_id):
+    def get(self, stream_id):
         """Getting stream by its id"""
         return super(Stream, self).get(stream_id)
 
@@ -22,7 +16,7 @@ class Stream(API):
         """Getting stream events of specific stream by its id"""
         return super(Stream, self).get(stream_id, 'events')
 
-    def get_deleted(self):
+    def deleted(self):
         """Getting all deleted streams"""
         return super(Stream, self).get('deleted')
 

@@ -10,5 +10,8 @@ class Campaign(API):
     def get(self, campaign_id=None):
         return super(Campaign, self).get(campaign_id)
 
-    def get_deleted(self):
+    def deleted(self):
         return super(Campaign, self).get('deleted')
+
+    def streams(self, campaign_id):
+        return super(Campaign, self).get(campaign_id, 'streams')
