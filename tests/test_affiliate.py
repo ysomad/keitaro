@@ -1,13 +1,14 @@
-def test_get_all(keitaro_test_client):
-    response = keitaro_test_client.affiliate.get()
-    assert response.status_code == 200
-    assert isinstance(response, list)
+def test_get_all(all_affiliate):
+    json = all_affiliate.json()
+    assert all_affiliate.status_code == 200
+    assert isinstance(json, list)
 
 
-def test_get_by_id(keitaro_test_client, random_affiliate):
+def test_get_by_id(api, random_affiliate):
     random_affiliate_id = random_affiliate['id']
-    response = keitaro_test_client.affiliate.get(random_affiliate_id)
-    assert response.status_code == 200
-    assert isinstance(response, dict)
-    assert response['id'] == random_affiliate_id
+    res = api.affiliate.get(random_affiliate_id)
+    json = res.json()
+    assert res.status_code == 200
+    assert isinstance(json, dict)
+    assert json['id'] == random_affiliate_id
 

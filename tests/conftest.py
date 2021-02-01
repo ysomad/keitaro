@@ -48,3 +48,29 @@ def all_offers(api):
 @pytest.fixture
 def random_offer(all_offers):
     return random.choice(all_offers.json())
+
+
+@pytest.fixture
+def all_affiliate(api):
+    return api.affiliate.get()
+
+
+@pytest.fixture
+def random_affiliate(all_affiliate):
+    return random.choice(all_affiliate.json())
+
+
+@pytest.fixture
+def botlist(api):
+    return api.bot.get()
+
+
+@pytest.fixture
+def all_domains(api):
+    return api.domain.get()
+
+
+@pytest.fixture
+def all_deleted_domains(api)
+    return api.domain.deleted()
+
