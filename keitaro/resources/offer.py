@@ -2,10 +2,9 @@ from keitaro.api import API
 
 
 class Offer(API):
-    endpoint = 'offers'
 
-    def __init__(self, client):
-        super(Offer, self).__init__(client, Offer.endpoint)
+    def __init__(self, client, endpoint='offers'):
+        super(Offer, self).__init__(client, endpoint)
 
     def get(self, offer_id=None):
         return super(Offer, self).get(offer_id)

@@ -2,10 +2,9 @@ from keitaro.api import API
 
 
 class Landing(API):
-    endpoint = 'landing_pages'
 
-    def __init__(self, client):
-        super(Landing, self).__init__(client, Landing.endpoint)
+    def __init__(self, client, endpoint='landing_pages'):
+        super(Landing, self).__init__(client, endpoint)
 
     def get(self, landing_id=None):
         return super(Landing, self).get(landing_id)

@@ -2,10 +2,9 @@ from keitaro.api import API
 
 
 class Group(API):
-    endpoint = 'groups'
 
-    def __init__(self, client):
-        super(Group, self).__init__(client, Group.endpoint)
+    def __init__(self, client, endpoint='groups'):
+        super(Group, self).__init__(client, endpoint)
 
     def get(self, group_type):
         """group_type = campaigns/offers/landings"""

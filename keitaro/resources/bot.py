@@ -2,10 +2,9 @@ from keitaro.api import API
 
 
 class Bot(API):
-    endpoint = 'botlist'
 
-    def __init__(self, client):
-        super(Bot, self).__init__(client, Bot.endpoint)
+    def __init__(self, client, endpoint='botlist'):
+        super(Bot, self).__init__(client, endpoint)
 
     def get(self):
         return super(Bot, self).get()

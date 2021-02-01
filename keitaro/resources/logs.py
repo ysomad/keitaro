@@ -2,10 +2,9 @@ from keitaro.api import API
 
 
 class Logs(API):
-    endpoint = 'logs'
 
-    def __init__(self, client):
-        super(Logs, self).__init__(client, Logs.endpoint)
+    def __init__(self, client, endpoint='logs'):
+        super(Logs, self).__init__(client, endpoint)
 
     def get(self, logs_type, limit):
         # TODO: add all query params

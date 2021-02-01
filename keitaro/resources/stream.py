@@ -3,10 +3,9 @@ from keitaro.resources import Campaign
 
 
 class Stream(API):
-    endpoint = 'streams'
 
-    def __init__(self, client):
-        super(Stream, self).__init__(client, Stream.endpoint)
+    def __init__(self, client, endpoint='streams'):
+        super(Stream, self).__init__(client, endpoint)
 
     def get(self, stream_id):
         """Getting stream by its id"""
