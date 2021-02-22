@@ -7,12 +7,12 @@ from .resources import *
 class Client:
     api_endpoint = 'admin_api/v1/'
 
-    def __init__(self, api_key, host, env):
-        if env:
-            from os import getenv
+    def __init__(self, api_key, host, from_env=False):
+        if from_env:
+            import os
 
-            self.api_key = getenv(api_key)
-            self.host = getenv(host)
+            self.api_key = os.getenv(api_key)
+            self.host = os.getenv(host)
         else:
             self.api_key = api_key
             self.host = host
@@ -34,17 +34,17 @@ class Client:
 
 
 class Keitaro:
-    def __init__(self, api_key, host, env=False):
-        self.client = Client(api_key, host, env)
-        self.affiliate = Affiliate(self.client)
-        self.campaign = Campaign(self.client)
-        self.offer = Offer(self.client)
-        self.stream = Stream(self.client)
-        self.landing = Landing(self.client)
-        self.source = Source(self.client)
-        self.domain = Domain(self.client)
-        self.group = Group(self.client)
-        self.user = User(self.client)
-        self.bot = Bot(self.client)
-        self.report = Report(self.client)
-        self.logs = Logs(self.client)
+    def __init__(self, api_key, host, from_env=False):
+        self.client = Client(api_key, host, from_env)
+        self.affiliate_networks = AffiliateNetwork(self.client)
+        self.campaigns = Campaign(self.client)
+        self.offers = Offer(self.client)
+        self.streams = Stream(self.client)
+        self.landing_pages = LandingPage(self.client)
+        self.traffic_sources = TrafficSource(self.client)
+        self.domains = Domain(self.client)
+        self.groups = Group(self.client)
+        self.users = User(self.client)
+        self.botlist = BotList(self.client)
+        self.reports = Report(self.client)
+        self.logs = Log(self.client)

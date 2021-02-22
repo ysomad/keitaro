@@ -7,10 +7,12 @@ class Campaign(API):
         super(Campaign, self).__init__(client, endpoint)
 
     def get(self, campaign_id=None):
+        """Getting all campaigns or specific one if campaign_id is not None"""
         return super(Campaign, self).get(campaign_id)
 
-    def deleted(self):
+    def get_deleted(self):
+        """Getting all deleted/archived campaigns"""
         return super(Campaign, self).get('deleted')
 
-    def streams(self, campaign_id):
+    def get_streams(self, campaign_id):
         return super(Campaign, self).get(campaign_id, 'streams')

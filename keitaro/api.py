@@ -7,12 +7,9 @@ class API:
         self.client = client
         self.resource_endpoint = resource_endpoint
 
-    def set_resource_endpoint(self, resource_endpoint):
-        self.resource_endpoint = resource_endpoint
-
     def _build_endpoint(self, *path_params):
         print(f'Path params: {path_params}')
-        return '/'.join(str(p).rstrip('/') for p in path_params)
+        return '/'.join(str(param).rstrip('/') for param in path_params if param)
 
     def _build_payload(self, **query_params):
         print(f'Payload: {query_params}')
