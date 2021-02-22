@@ -1,10 +1,13 @@
-def test_client(api, env_vars):
-    assert api.client.api_key == env_vars['api_key']
-    assert api.client.host == env_vars['host']
-    # TODO: add more tests
+import os
+
+import keitaro
 
 
-def test_env_client(env_api, env_vars):
-    assert env_api.client.api_key == env_vars['api_key']
-    assert env_api.client.host == env_vars['host']
-    # TODO: add more tests
+def test_client(client):
+    assert client.client.api_key == os.getenv('API_KEY')
+    assert client.client.host == os.getenv('HOST')
+
+
+def test_env_client(env_client):
+    assert env_client.client.api_key == os.getenv('API_KEY')
+    assert env_client.client.host == os.getenv('HOST')
