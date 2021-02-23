@@ -9,3 +9,7 @@ class BotList(API):
     def get(self):
         """Retrieve rows from the Bot List"""
         return super(BotList, self).get()
+
+    def add(self, value):
+        """Adding IPs to the Bot List, where value is IPs list"""
+        return super(BotList, self).post('add', value=value)
