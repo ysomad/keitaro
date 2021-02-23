@@ -1,4 +1,3 @@
-import json
 from requests import request
 
 from .resources import *
@@ -29,8 +28,10 @@ class Client:
     def send_request(self, method, endpoint, **kwargs):
         url = self.api_url + endpoint
         print(f'{method} {url}')
-        return request(method, url, headers={'Api-Key': self.api_key},
-                **kwargs)
+        response = request(method, url, headers={'Api-Key': self.api_key},
+                           **kwargs)
+        print(f'Response: {response.text}')
+        return response
 
 
 class Keitaro:
