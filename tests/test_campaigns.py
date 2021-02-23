@@ -33,10 +33,17 @@ def test_get_streams(client):
     resp = client.campaigns.get_streams(random_campaign['id'])
     data = resp.json()
     assert resp.status_code == 200
-    assert isinstance(data, list) 
+    assert isinstance(data, list)
     assert data[0]['campaign_id'] == random_campaign['id']
 
 
-
-
-
+def test_create(client):
+    resp = client.campaigns.create(
+        name='testcampaign123334', type='position', state='active', cost_auto=True,
+        group_id=1, domain_id=1, cost_currency='UAH')
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['name'] == 'testcampaign123334'
+    assert data['type'] == 'position'
+    assert data['state'] == 'active'
+    # TODO: refactoring

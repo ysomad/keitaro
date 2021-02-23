@@ -1,6 +1,8 @@
 import random
 import json
 
+from keitaro.utils import generate_random_string
+
 
 def test_get_all(client):
     resp = client.affiliate_networks.get()
@@ -17,7 +19,8 @@ def test_get_by_id(client, random_affiliate_network):
     assert data['name'] == random_affiliate_network['name']
 
 
-def test_create(client, random_string):
+def test_create(client):
+    random_string = generate_random_string()
     name = f'Test AN {random_string}'
     postback_url = 'https://{random_string}.com/'
     notes = 'Test notes'

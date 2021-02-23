@@ -20,8 +20,3 @@ def env_client():
 @pytest.fixture
 def random_affiliate_network(client):
     return random.choice(client.affiliate_networks.get().json())
-
-
-@pytest.fixture
-def random_string():
-    return ''.join(random.choice(string.ascii_letters) for letter in range(8))
