@@ -9,17 +9,24 @@ class API:
 
     def _build_endpoint(self, *path_params):
         print(f'Path params: {path_params}')
-        return '/'.join(str(param).rstrip('/') for param in path_params if param)
+        return '/'.join(str(par).rstrip('/') for par in path_params if par)
 
-    def _build_payload(self, **query_params):
+    def _build_payload(self, query_params):
         print(f'Payload: {query_params}')
-        return query_params
+        payload = self._remove_none_values_from_query_params(query_params)
+        print(f'Payload without None values: {payload}')
+        return payload
+
+    def _remove_none_values_from_query_params(self, query_params):
+        return {key: val for key, val in query_params.items() if val}
 
     def _prepare_request(self, method, *path_params, **query_params):
         endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
-        payload = self._build_payload(**query_params)
+        payload = self._build_payload(query_params)
         return self.client.send_request(method, endpoint,
                                         data=json.dumps(payload))
+
+    # TODO: Remove these methods and directly call prepare_request() from resources
 
     def get(self, *path_params, **query_params):
         return self._prepare_request('GET', *path_params, **query_params)

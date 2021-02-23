@@ -1,6 +1,19 @@
 from requests import request
 
-from .resources import *
+from .resources import (
+    AffiliateNetwork,
+    Campaign,
+    Offer,
+    Stream,
+    LandingPage,
+    TrafficSource,
+    Domain,
+    Group,
+    User,
+    BotList,
+    Report,
+    Log
+)
 
 
 class Client:
