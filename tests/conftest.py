@@ -3,18 +3,18 @@ import random
 import string
 import json
 
-import keitaro
+from keitaro import Keitaro
 import pytest
 
 
 @pytest.fixture
 def client():
-    return keitaro.init(os.getenv('API_KEY'), os.getenv('HOST'))
+    return Keitaro(os.getenv('API_KEY'), os.getenv('HOST'))
 
 
 @pytest.fixture
 def env_client():
-    return keitaro.init('API_KEY', 'HOST', from_env=True)
+    return Keitaro('API_KEY', 'HOST', from_env=True)
 
 
 @pytest.fixture

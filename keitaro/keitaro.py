@@ -1,7 +1,8 @@
 from requests import request
 
-from .resources import AffiliateNetwork, Campaign, Offer, Stream,\
-    LandingPage, TrafficSource, Domain, Group, User, BotList, Report, Log
+from .resources import (
+    AffiliateNetwork, Campaign, Offer, Stream, LandingPage, TrafficSource,
+    Domain, Group, User, BotList, Report, Log, Click)
 
 
 class Client:
@@ -17,9 +18,9 @@ class Client:
             self.api_key = api_key
             self.host = host
 
-        self.api_url = self._build_api_url()
+        self.api_url = self.build_api_url()
 
-    def _build_api_url(self):
+    def build_api_url(self):
         if self.host.endswith('/'):
             api_url = self.host + Client.api_endpoint
         else:
@@ -52,3 +53,4 @@ class Keitaro:
         self.botlist = BotList(self.client)
         self.reports = Report(self.client)
         self.logs = Log(self.client)
+        self.clicks = Click(self.client)

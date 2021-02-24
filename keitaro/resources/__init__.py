@@ -10,3 +10,4 @@ from .users import User
 from .botlist import BotList
 from .reports import Report
 from .logs import Log
+from .clicks import Click

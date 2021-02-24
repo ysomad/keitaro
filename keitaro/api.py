@@ -21,10 +21,11 @@ class API:
         return {key: val for key, val in query_params.items() if val}
 
     def _prepare_request(self, method, *path_params, **query_params):
+        """Preparing http request before sending"""
         endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
         payload = self._build_payload(query_params)
-        return self.client.send_request(method, endpoint,
-                                        data=json.dumps(payload))
+        return self.client.send_request(
+            method, endpoint, data=json.dumps(payload))
 
     def get(self, *path_params, **query_params):
         return self._prepare_request('GET', *path_params, **query_params)

@@ -1,2 +1,2 @@
-from .keitaro import Keitaro as init
+from .keitaro import Keitaro
 from . import utils
