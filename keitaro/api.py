@@ -26,8 +26,6 @@ class API:
         return self.client.send_request(method, endpoint,
                                         data=json.dumps(payload))
 
-    # TODO: Remove these methods and directly call prepare_request() from resources
-
     def get(self, *path_params, **query_params):
         return self._prepare_request('GET', *path_params, **query_params)
 

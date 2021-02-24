@@ -5,17 +5,14 @@ from keitaro.resources import Campaign
 class Stream(API):
 
     def __init__(self, client, endpoint='streams'):
+        self.client = client
         super(Stream, self).__init__(client, endpoint)
 
     def get(self, stream_id):
         """Getting stream by its id"""
         return super(Stream, self).get(stream_id)
 
-    def events(self, stream_id):
-        """Getting stream events of specific stream by its id"""
-        return super(Stream, self).get(stream_id, 'events')
-
-    def deleted(self):
+    def get_deleted(self):
         """Getting all deleted streams"""
         return super(Stream, self).get('deleted')
 
@@ -23,14 +20,14 @@ class Stream(API):
         """Getting stream by word in payload stream"""
         return super(Stream, self).get('search', query=query)
 
-    def stream_schemas(self):
+    def get_schemas(self):
         """Getting available stream schemas"""
-        return super(Stream, self).get('stream_schemas')
+        return self.client.send_request('GET', 'stream_schemas')
 
-    def stream_types(self):
+    def get_types(self):
         """Getting avaiable stream types"""
-        return super(Stream, self).get('stream_types')
+        return self.client.send_request('GET', 'stream_types')
 
-    def stream_actions(self):
+    def get_actions(self):
         """Getting stream actions"""
-        return super(Stream, self).get('stream_actions')
+        return self.client.send_request('GET', 'stream_actions')

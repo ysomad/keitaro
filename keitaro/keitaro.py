@@ -29,7 +29,7 @@ class Client:
     def send_request(self, method, endpoint, **kwargs):
         url = self.api_url + endpoint
         print(f'{method} {endpoint}')
-        print(f'payload: {kwargs["data"]}')
+        print(f'payload: {kwargs}')
         response = request(method, url, headers={'Api-Key': self.api_key},
                            **kwargs)
         data = response.json()
