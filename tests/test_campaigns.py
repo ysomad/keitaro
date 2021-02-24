@@ -68,8 +68,50 @@ def test_disable(client):
     campaign_name = f'test campaign {generate_random_string()}'
     campaign = client.campaigns.create(
         name=campaign_name, state='active').json()
-    resp = client.campaigns.disable(1)
-    data = resp.json()[0]
+    resp = client.campaigns.disable(campaign['id'])
+    data = resp.json()
     assert resp.status_code == 200
-    assert isinstance(data, dict)
-    assert data['state'] == 'disabled'
+    assert isinstance(data, list)
+    assert data[0]['id'] == campaign['id']
+    assert data[0]['state'] == 'disabled'
+    assert data[0]['name'] == campaign['name']
+
+
+def test_enable(client):
+    campaign_name = f'test campaign {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='disabled').json()
+    resp = client.campaigns.enable(campaign['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['id'] == campaign['id']
+    assert data[0]['name'] == campaign['name']
+    assert data[0]['state'] == 'active'
+
+
+def test_restore(client):
+    campaign_name = f'test restore campaign {generate_random_string()}'
+    deleted_campaign = client.campaigns.create(
+        name=campaign_name, state='deleted')
+    deleted_campaign_data = deleted_campaign.json()
+    resp = client.campaigns.restore(deleted_campaign_data['id'])
+    data = resp.json()
+    assert deleted_campaign.status_code == 200
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['id'] == deleted_campaign_data['id']
+    assert data[0]['state'] != 'deleted'
+    assert data[0]['name'] == deleted_campaign_data['name']
+
+
+def test_update_costs(client):
+    campaign_name = f'test update_costs {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='active').json()
+    resp = client.campaigns.update_costs(
+        campaign['id'], start_date='2021-09-10 20:10', timezone='Europe/Madrid',
+        end_date='2021-09-10 20:20', cost='19.22', currency='EUR')
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['success'] == True

@@ -50,3 +50,19 @@ class Campaign(API):
         """Returns list of found campaigns by name"""
         return filter_resource_entities_by_key_value(
             self.get().json(), 'name', name)
+
+    def enable(self, campaign_id):
+        """Changing state of campaign to active"""
+        return super(Campaign, self).post(campaign_id, 'enable')
+
+    def restore(self, campaign_id):
+        """Restoring campaign from archive"""
+        return super(Campaign, self).post(campaign_id, 'restore')
+
+    def update_costs(self, campaign_id, *, start_date, end_date, timezone,
+                     cost, currency, only_campaign_uniques=None, filters=None):
+        """Updating campaign costs"""
+        query_params = remove_class_related_keys_from_local_symbol_table(
+            locals())
+        return super(Campaign, self).post(
+            campaign_id, 'update_costs', **query_params)

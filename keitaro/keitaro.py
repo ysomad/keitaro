@@ -32,7 +32,8 @@ class Client:
         print(f'payload: {kwargs["data"]}')
         response = request(method, url, headers={'Api-Key': self.api_key},
                            **kwargs)
-        print(f'response: {response.json()}')
+        data = response.json()
+        print(f'response: {data}')
         return response
 
 
