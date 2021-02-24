@@ -1,73 +1,46 @@
-import json
+import random
 
-from keitaro import api, get_random_id, generate_name
-
-
-def test_get():
-    response = api.offers.get()
-    assert response.status_code == 200
-    assert isinstance(response.json(), list)
+from keitaro.utils import generate_random_string
 
 
-def test_get_by_id():
-    offer_id = get_random_id(api.offers.get())
-    response = api.offers.get(offer_id)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, dict)
-    assert json['id'] == offer_id
+def test_get_all(client):
+    resp = client.offers.get()
+    assert resp.status_code == 200
+    assert isinstance(resp.json(), list)
 
 
-def test_create():
-    name = generate_name('test_create')
-    group_id = 14
-    payload = {
-        'name': name,
-        'group_id': group_id
-    }
-    response = api.offers.create(payload)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, dict)
-    assert json['name'] == name
-    assert json['group_id'] == group_id
+def test_get_by_id(client):
+    random_offer = random.choice(client.offers.get().json())
+    resp = client.offers.get(random_offer['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, dict)
+    assert data['id'] == random_offer['id']
+    assert data['name'] == random_offer['name']
 
 
-def test_delete():
-    payload = {
-        'name': generate_name('test_delete'),
-        'group_id': 14
-    }
-    created_offer = api.offers.create(payload)
-    created_offer_id = created_offer.json()['id']
-    response = api.offers.delete(created_offer_id)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, list)
-    assert json[0]['id'] == int(created_offer_id)
-    assert json[0]['state'] == 'deleted'
+def test_create(client):
+    name = f'Test offer {generate_random_string(6)}'
+    payout_value = 12
+    payout_currency = 'EUR'
+    payout_auto = True
+    resp = client.offers.create(
+        name, payout_currency=payout_currency, payout_value=payout_value,
+        payout_auto=payout_auto)
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['name'] == name
+    assert data['payout_value'] == payout_value
+    assert data['payout_auto'] == payout_auto
+    assert data['payout_currency'] == payout_currency
 
 
-def test_update():
-    name = generate_name('test_update')
-    offer_payload = {
-        'name': name,
-        'country': 'GB',
-        'action_payload': 'https://example.com'
-    }
-    offer = api.offers.create(offer_payload).json()
-
-    updated_name = name + '_updated'
-    updated_action_payload = 'https://updatedurl.net'
-    payload = {
-        'name': updated_name,
-        'country': 'BH',
-        'action_payload': updated_action_payload
-    }
-    response = api.offers.update(offer['id'], payload)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, dict)
-    assert json['name'] == updated_name
-    assert json['country'][0] == 'BH'
-    assert json['action_payload'] == updated_action_payload
+def test_clone(client):
+    new_offer = client.offers.create(
+        f'Test offer {generate_random_string()}').json()
+    resp = client.offers.clone(new_offer['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['name'] == f'Copy of {new_offer["name"]}'
+    assert int(data[0]['id']) == int(new_offer['id']) + 1

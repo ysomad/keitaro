@@ -1,133 +1,116 @@
-from keitaro import api, get_random_id, generate_name
+import random
+
+from keitaro.utils import generate_random_string
 
 
-def test_get():
-    response = api.campaigns.get()
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, list)
+def test_get_all(client):
+    resp = client.campaigns.get()
+    assert resp.status_code == 200
+    assert isinstance(resp.json(), list)
 
 
-def test_get_by_id():
-    campaign_id = get_random_id(api.campaigns.get())
-    response = api.campaigns.get(campaign_id)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, dict)
-    assert json['id'] == campaign_id
+def test_get_by_id(client):
+    all_campaigns = client.campaigns.get().json()
+    random_campaign = random.choice(all_campaigns)
+    resp = client.campaigns.get(random_campaign['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, dict)
+    assert data['id'] == random_campaign['id']
+    assert data['name'] == random_campaign['name']
 
 
-def test_get_deleted():
-    response = api.campaigns.get_deleted()
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, list)
-    assert all(campaign['state'] == 'deleted' for campaign in json)
+def test_get_deleted(client):
+    resp = client.campaigns.get_deleted()
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    for campaign in data:
+        assert data[0]['state'] == 'deleted'
 
 
-def test_create():
-    name = generate_name('test_create')
-    group_id = 122
-    payload = {
-        'name': name,
-        'group_id': group_id
-    }
-    response = api.campaigns.create(payload)
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, dict)
-    assert json['name'] == name
-    assert json['group_id'] == group_id
+def test_get_streams(client):
+    first_campaign = client.campaigns.get(1).json()
+    resp = client.campaigns.get_streams(1)
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['campaign_id'] == first_campaign['id']
+    # TODO: check this test
 
 
-def test_clone():
-    payload = {
-        'name': generate_name('test_clone'),
-        'group_id': 122
-    }
-    cloning_campaign = api.campaigns.create(payload).json()
-    response = api.campaigns.clone(cloning_campaign['id'])
-    json = response.json()
-    assert response.status_code == 200
-    assert isinstance(json, list)
-    assert json[0]['name'] == 'Copy of ' + cloning_campaign['name']
+def test_create(client):
+    name = f'test campaign {generate_random_string()}'
+    cost_currency = 'RUB'
+    campaign_type = 'position'
+    resp = client.campaigns.create(
+        name=name, cost_currency=cost_currency, type=campaign_type)
+    data = resp.json()
+    assert resp.status_code == 200
+    isinstance(data, dict)
+    assert data['name'] == name
+    assert data['type'] == campaign_type
+    assert data['cost_currency'] == cost_currency
 
 
-def test_disable():
-    payload = {
-        'name': generate_name('test_disable'),
-        'group_id': 122,
-        'state': 'active'
-    }
-    active_campaign = api.campaigns.create(payload).json()
-    response = api.campaigns.disable(active_campaign['id'])
-    json = response.json()
-    assert response.status_code == 200
-    assert json[0]['id'] == active_campaign['id']
-    assert json[0]['state'] == 'disabled'
+def test_get_by_name(client):
+    name = f'test campaign {generate_random_string()}'
+    resp = client.campaigns.create(name=name)
+    data = resp.json()
+    filtered_campaigns = client.campaigns.get_by_name(name)
+    assert resp.status_code == 200
+    assert isinstance(filtered_campaigns, list)
+    assert filtered_campaigns[0]['name'] == data['name']
 
 
-def test_enable():
-    payload = {
-        'name': generate_name('test_enable'),
-        'group_id': 122,
-        'state': 'disabled'
-    }
-    disabled_campaign = api.campaigns.create(payload).json()
-    response = api.campaigns.enable(disabled_campaign['id'])
-    json = response.json()
-    assert response.status_code == 200
-    assert json[0]['id'] == disabled_campaign['id']
-    assert json[0]['state'] == 'active'
+def test_disable(client):
+    campaign_name = f'test campaign {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='active').json()
+    resp = client.campaigns.disable(campaign['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['id'] == campaign['id']
+    assert data[0]['state'] == 'disabled'
+    assert data[0]['name'] == campaign['name']
 
 
-def test_delete():
-    payload = {
-        'name': generate_name('test_delete'),
-        'group_id': 122,
-        'state': 'active'
-    }
-    active_campaign = api.campaigns.create(payload).json()
-    response = api.campaigns.delete(active_campaign['id'])
-    json = response.json()
-    assert response.status_code == 200
-    assert json[0]['id'] == active_campaign['id']
-    assert json[0]['state'] == 'deleted'
+def test_enable(client):
+    campaign_name = f'test campaign {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='disabled').json()
+    resp = client.campaigns.enable(campaign['id'])
+    data = resp.json()
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['id'] == campaign['id']
+    assert data[0]['name'] == campaign['name']
+    assert data[0]['state'] == 'active'
 
 
-def test_restore():
-    payload = {
-        'name': generate_name('test_restore'),
-        'group_id': 122,
-        'state': 'deleted'
-    }
-    deleted_campaign = api.campaigns.create(payload).json()
-    response = api.campaigns.restore(deleted_campaign['id'])
-    json = response.json()
-    assert response.status_code == 200
-    assert json[0]['id'] == deleted_campaign['id']
-    assert json[0]['state'] == 'active'
+def test_restore(client):
+    campaign_name = f'test restore campaign {generate_random_string()}'
+    deleted_campaign = client.campaigns.create(
+        name=campaign_name, state='deleted')
+    deleted_campaign_data = deleted_campaign.json()
+    resp = client.campaigns.restore(deleted_campaign_data['id'])
+    data = resp.json()
+    assert deleted_campaign.status_code == 200
+    assert resp.status_code == 200
+    assert isinstance(data, list)
+    assert data[0]['id'] == deleted_campaign_data['id']
+    assert data[0]['state'] != 'deleted'
+    assert data[0]['name'] == deleted_campaign_data['name']
 
 
-def test_update():
-    name = generate_name('test_update')
-    payload = {
-        'name': name,
-        'group_id': 122,
-    }
-    campaign = api.campaigns.create(payload).json()
-    updated_name = name + '_updated'
-    update_payload = {
-        'group_id': 122,
-        'name': updated_name,
-        'cost_value': '11',
-        'cost_auto': False,
-        'traffic_source_id': 3
-    }
-    response = api.campaigns.update(campaign['id'], update_payload)
-    json = response.json()
-    assert response.status_code == 200
-    assert json['name'] == updated_name
-    assert json['id'] == campaign['id']
-    assert json['cost_value'] == '11'
-    assert json['cost_auto'] == False
+def test_update_costs(client):
+    campaign_name = f'test update_costs {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='active').json()
+    resp = client.campaigns.update_costs(
+        campaign['id'], start_date='2021-09-10 20:10', timezone='Europe/Madrid',
+        end_date='2021-09-10 20:20', cost='19.22', currency='EUR')
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['success'] == True
