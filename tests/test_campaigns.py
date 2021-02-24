@@ -44,10 +44,32 @@ def test_create(client):
     name = f'test campaign {generate_random_string()}'
     cost_currency = 'RUB'
     campaign_type = 'position'
-    resp = client.campaigns.create(name=name, cost_currency=cost_currency,
-                                   type=campaign_type)
+    resp = client.campaigns.create(
+        name=name, cost_currency=cost_currency, type=campaign_type)
     data = resp.json()
     assert resp.status_code == 200
+    isinstance(data, dict)
     assert data['name'] == name
     assert data['type'] == campaign_type
     assert data['cost_currency'] == cost_currency
+
+
+def test_get_by_name(client):
+    name = f'test campaign {generate_random_string()}'
+    resp = client.campaigns.create(name=name)
+    data = resp.json()
+    filtered_campaigns = client.campaigns.get_by_name(name)
+    assert resp.status_code == 200
+    assert isinstance(filtered_campaigns, list)
+    assert filtered_campaigns[0]['name'] == data['name']
+
+
+def test_disable(client):
+    campaign_name = f'test campaign {generate_random_string()}'
+    campaign = client.campaigns.create(
+        name=campaign_name, state='active').json()
+    resp = client.campaigns.disable(1)
+    data = resp.json()[0]
+    assert resp.status_code == 200
+    assert isinstance(data, dict)
+    assert data['state'] == 'disabled'

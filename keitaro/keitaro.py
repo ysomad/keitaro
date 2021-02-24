@@ -1,19 +1,7 @@
 from requests import request
 
-from .resources import (
-    AffiliateNetwork,
-    Campaign,
-    Offer,
-    Stream,
-    LandingPage,
-    TrafficSource,
-    Domain,
-    Group,
-    User,
-    BotList,
-    Report,
-    Log
-)
+from .resources import AffiliateNetwork, Campaign, Offer, Stream,\
+    LandingPage, TrafficSource, Domain, Group, User, BotList, Report, Log
 
 
 class Client:
@@ -40,9 +28,12 @@ class Client:
 
     def send_request(self, method, endpoint, **kwargs):
         url = self.api_url + endpoint
-        print(f'{method} {url}')
-        return request(method, url, headers={'Api-Key': self.api_key},
-                       **kwargs)
+        print(f'{method} {endpoint}')
+        print(f'payload: {kwargs["data"]}')
+        response = request(method, url, headers={'Api-Key': self.api_key},
+                           **kwargs)
+        print(f'response: {response.json()}')
+        return response
 
 
 class Keitaro:

@@ -18,16 +18,6 @@ def test_get_by_id(client):
     assert data['name'] == random_landing_page['name']
 
 
-def test_download(client):
-    random_landing_page = random.choice(client.landing_pages.get().json())
-    resp = client.landing_pages.download(random_landing_page['id'])
-    content_disposition = resp.headers['content-disposition']
-    assert resp.status_code == 200
-    assert resp.headers['content-type'] == 'application/octet-stream'
-    # TODO: add tests for downloading data
-    # TODO: add functionality to download data
-
-
 def test_get_file(client):
     resp = client.landing_pages.get_file(1, 'assets/landing_page.zip')
     data = resp.json()

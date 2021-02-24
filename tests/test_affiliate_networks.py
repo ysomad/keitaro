@@ -38,7 +38,7 @@ def test_create(client):
 
 def test_clone(client):
     name = f'test AN {generate_random_string()}'
-    new_affiliate_network = client.affiliate_networks.create(name).json()
+    new_affiliate_network = client.affiliate_networks.create(name=name).json()
     resp = client.affiliate_networks.clone(new_affiliate_network['id'])
     data = resp.json()
     assert resp.status_code == 200

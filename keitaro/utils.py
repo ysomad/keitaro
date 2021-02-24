@@ -21,6 +21,15 @@ def generate_random_string(length=8):
 def remove_class_related_keys_from_local_symbol_table(symbol_table):
     """Removing 'self', '__class__' keys from locals() symbol table"""
     new_symbol_table = symbol_table
-    symbol_table.pop('self', None)
-    symbol_table.pop('__class__', None)
+    new_symbol_table.pop('self', None)
+    new_symbol_table.pop('__class__', None)
     return new_symbol_table
+
+
+def filter_resource_entities_by_key_value(resource_entities, key, value):
+    """Filtering all resource entities by key and values,
+    returns list of resource entities"""
+    found_dicts = [d for d in resource_entities if d[key] == value]
+    if not found_dicts:
+        raise KeyError(f'resource entities with {key} "{value}" not found')
+    return found_dicts
