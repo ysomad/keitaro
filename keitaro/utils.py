@@ -18,12 +18,12 @@ def generate_random_string(length=8):
     return ''.join(random.choice(symbols) for letter in range(length))
 
 
-def remove_class_related_keys_from_local_symbol_table(symbol_table):
-    """Removing 'self', '__class__' keys from locals() symbol table"""
-    new_symbol_table = symbol_table
-    new_symbol_table.pop('self', None)
-    new_symbol_table.pop('__class__', None)
-    return new_symbol_table
+def remove_key_values(dictionary, keys=['self', '__class__']):
+    """Removing keys values from dictionary"""
+    new_dict = dictionary
+    for key in keys:
+        del new_dict[key]
+    return new_dict
 
 
 def filter_resource_entities_by_key_value(resource_entities, key, value):

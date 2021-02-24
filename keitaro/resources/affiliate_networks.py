@@ -1,5 +1,5 @@
 from keitaro.api import API
-from keitaro.utils import remove_class_related_keys_from_local_symbol_table
+from keitaro.utils import remove_key_values
 
 
 class AffiliateNetwork(API):
@@ -16,7 +16,7 @@ class AffiliateNetwork(API):
                state=None):
         """Creating new affiliate network"""
         return super(AffiliateNetwork, self).post(
-            **remove_class_related_keys_from_local_symbol_table(locals()))
+            **remove_key_values(locals()))
 
     def clone(self, affiliate_network_id):
         """Cloning affiliate network by id"""

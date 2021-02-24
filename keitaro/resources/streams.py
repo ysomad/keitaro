@@ -1,5 +1,5 @@
 from keitaro.api import API
-from keitaro.utils import remove_class_related_keys_from_local_symbol_table
+from keitaro.utils import remove_key_values
 
 
 class Stream(API):
@@ -39,8 +39,7 @@ class Stream(API):
         """Creating new stream for campaign with campaign id.
         To retrieve available stream schemas use streams.get_schemas(),
         to retrieve available stream action types use stream.get_actions()"""
-        return super(Stream, self).post(
-            **remove_class_related_keys_from_local_symbol_table(locals()))
+        return super(Stream, self).post(**remove_key_values(locals()))
 
     def disable(self, stream_id):
         """Changing stream state to disabled"""

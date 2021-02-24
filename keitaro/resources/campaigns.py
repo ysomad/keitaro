@@ -2,7 +2,7 @@ import json
 
 from keitaro.api import API
 from keitaro.utils import (
-    generate_random_string, remove_class_related_keys_from_local_symbol_table,
+    generate_random_string, remove_key_values,
     filter_resource_entities_by_key_value)
 
 
@@ -34,8 +34,7 @@ class Campaign(API):
                traffic_source_id=None, bind_visitors=None, parameters=None,
                domain_id=None, postbacks=None):
         """Creating new advertising campaign"""
-        query_params = remove_class_related_keys_from_local_symbol_table(
-            locals())
+        query_params = remove_key_values(locals())
         query_params['alias'] = generate_random_string()
         return super(Campaign, self).post(**query_params)
 
@@ -59,7 +58,6 @@ class Campaign(API):
     def update_costs(self, campaign_id, *, start_date, end_date, timezone,
                      cost, currency, only_campaign_uniques=None, filters=None):
         """Updating campaign costs"""
-        query_params = remove_class_related_keys_from_local_symbol_table(
-            locals())
+        query_params = remove_key_values(locals())
         return super(Campaign, self).post(
             campaign_id, 'update_costs', **query_params)
