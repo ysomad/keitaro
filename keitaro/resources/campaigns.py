@@ -11,9 +11,6 @@ class Campaign(API):
     def __init__(self, client, endpoint='campaigns'):
         super(Campaign, self).__init__(client, endpoint)
 
-    def __str__(self):
-        return 'campaign'
-
     def get(self, campaign_id=None):
         """Getting all campaigns or specific one if
         campaign_id is not None"""
@@ -31,7 +28,7 @@ class Campaign(API):
         """Cloning campaign by its campaign_id"""
         return super(Campaign, self).post(campaign_id)
 
-    def create(self, *, name, alias=None, type=None,
+    def create(self, name, *, alias=None, type=None,
                state=None, cost_type=None, cookies_ttl=None, cost_value=None,
                cost_currency=None, cost_auto=False, group_id=None, token=None,
                traffic_source_id=None, bind_visitors=None, parameters=None,

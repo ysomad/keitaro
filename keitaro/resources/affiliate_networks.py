@@ -11,7 +11,7 @@ class AffiliateNetwork(API):
         """Getting all affiliate networks or specific one by its id"""
         return super(AffiliateNetwork, self).get(affiliate_network_id)
 
-    def create(self, *, name, postback_url=None, offer_param=None, offers=None,
+    def create(self, name, *, postback_url=None, offer_param=None, offers=None,
                template_name=None, notes=None, pull_api_options=None,
                state=None):
         """Creating new affiliate network"""
