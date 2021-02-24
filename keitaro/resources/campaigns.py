@@ -41,6 +41,5 @@ class Campaign(API):
                traffic_source_id=None, bind_visitors=None, parameters=None,
                domain_id=None, postbacks=None):
         """Creating new advertising campaign"""
-        function_kwargs = remove_class_related_keys_from_local_symbol_table(
-            symbol_table=locals())
-        return super(Campaign, self).post(**function_kwargs)
+        return super(Campaign, self).post(
+            **remove_class_related_keys_from_local_symbol_table(locals()))

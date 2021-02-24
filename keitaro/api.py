@@ -8,13 +8,10 @@ class API:
         self.resource_endpoint = resource_endpoint
 
     def _build_endpoint(self, *path_params):
-        print(f'Path params: {path_params}')
         return '/'.join(str(par).rstrip('/') for par in path_params if par)
 
     def _build_payload(self, query_params):
-        print(f'Payload: {query_params}')
         payload = self._remove_none_values_from_query_params(query_params)
-        print(f'Payload without None values: {payload}')
         return payload
 
     def _remove_none_values_from_query_params(self, query_params):
@@ -22,7 +19,9 @@ class API:
 
     def _prepare_request(self, method, *path_params, **query_params):
         endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
+        print(f'Endpoint: {endpoint}')
         payload = self._build_payload(query_params)
+        print(f'Payload: {payload}')
         return self.client.send_request(method, endpoint,
                                         data=json.dumps(payload))
 

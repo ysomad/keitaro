@@ -13,7 +13,3 @@ def test_add(client):
     assert isinstance(data, dict)
     for ip in ips_list.split('\n'):
         assert ip in botlist_data['value']
-
-
-def test_exclude(client):
-    pass

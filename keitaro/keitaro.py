@@ -41,10 +41,8 @@ class Client:
     def send_request(self, method, endpoint, **kwargs):
         url = self.api_url + endpoint
         print(f'{method} {url}')
-        response = request(method, url, headers={'Api-Key': self.api_key},
-                           **kwargs)
-        print(f'Response: {response.text}')
-        return response
+        return request(method, url, headers={'Api-Key': self.api_key},
+                       **kwargs)
 
 
 class Keitaro:

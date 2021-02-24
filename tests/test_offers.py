@@ -16,15 +16,3 @@ def test_get_by_id(client):
     assert isinstance(data, dict)
     assert data['id'] == random_offer['id']
     assert data['name'] == random_offer['name']
-
-
-def test_download_landing(client):
-    raise NotImplementedError
-
-
-def test_get_files_structure(client):
-    raise NotImplementedError
-
-
-def test_get_file_data(client):
-    raise NotImplementedError

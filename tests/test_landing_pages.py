@@ -26,7 +26,6 @@ def test_download(client):
     assert resp.headers['content-type'] == 'application/octet-stream'
     # TODO: add tests for downloading data
     # TODO: add functionality to download data
-    raise NotImplementedError
 
 
 def test_get_file(client):
@@ -45,4 +44,3 @@ def test_get_structure(client):
     assert isinstance(data, dict)
     assert isinstance(data['children'], list)
     # TODO: add more tests
-    raise NotImplementedError

@@ -1,6 +1,8 @@
 import json
 import random
 
+from keitaro.utils import generate_random_string
+
 
 def test_get_all(client):
     resp = client.campaigns.get()
@@ -29,21 +31,23 @@ def test_get_deleted(client):
 
 
 def test_get_streams(client):
-    random_campaign = random.choice(client.campaigns.get().json())
-    resp = client.campaigns.get_streams(random_campaign['id'])
+    first_campaign = client.campaigns.get(1).json()
+    resp = client.campaigns.get_streams(1)
     data = resp.json()
     assert resp.status_code == 200
     assert isinstance(data, list)
-    assert data[0]['campaign_id'] == random_campaign['id']
+    assert data[0]['campaign_id'] == first_campaign['id']
+    # TODO: check this test
 
 
 def test_create(client):
-    resp = client.campaigns.create(
-        name='testcampaign123334', type='position', state='active', cost_auto=True,
-        group_id=1, domain_id=1, cost_currency='UAH')
+    name = f'test campaign {generate_random_string()}'
+    cost_currency = 'RUB'
+    campaign_type = 'position'
+    resp = client.campaigns.create(name=name, cost_currency=cost_currency,
+                                   type=campaign_type)
     data = resp.json()
     assert resp.status_code == 200
-    assert data['name'] == 'testcampaign123334'
-    assert data['type'] == 'position'
-    assert data['state'] == 'active'
-    # TODO: refactoring
+    assert data['name'] == name
+    assert data['type'] == campaign_type
+    assert data['cost_currency'] == cost_currency
