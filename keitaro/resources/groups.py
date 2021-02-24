@@ -9,3 +9,8 @@ class Group(API):
     def get(self, group_type):
         """Getting all groups with group_type"""
         return super(Group, self).get(type=group_type)
+
+    def create(self, name, group_type, position=None):
+        """Creating new group with name and group_type"""
+        return super(Group, self).post(
+            name=name, type=group_type, position=position)
