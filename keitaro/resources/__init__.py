@@ -11,3 +11,4 @@ from .botlist import BotList
 from .reports import Report
 from .logs import Log
 from .clicks import Click
+from .integrations import Integration

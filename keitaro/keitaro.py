@@ -1,8 +1,9 @@
-from requests import request
+import os
 
+from requests import request
 from .resources import (
     AffiliateNetwork, Campaign, Offer, Stream, LandingPage, TrafficSource,
-    Domain, Group, User, BotList, Report, Log, Click)
+    Domain, Group, User, BotList, Report, Log, Click, Integration)
 
 
 class Client:
@@ -10,17 +11,15 @@ class Client:
 
     def __init__(self, api_key, host, from_env=False):
         if from_env:
-            import os
-
             self.api_key = os.getenv(api_key)
             self.host = os.getenv(host)
         else:
             self.api_key = api_key
             self.host = host
+        self.api_url = self._build_api_uri()
 
-        self.api_url = self.build_api_url()
-
-    def build_api_url(self):
+    def _build_api_uri(self):
+        """Builds keitaro admin api URI"""
         if self.host.endswith('/'):
             api_url = self.host + Client.api_endpoint
         else:
@@ -28,6 +27,7 @@ class Client:
         return api_url
 
     def send_request(self, method, endpoint, **kwargs):
+        """Sending HTTP request to URI endpoint"""
         url = self.api_url + endpoint
         print(f'{method} {endpoint}')
         print(f'payload: {kwargs}')
@@ -54,3 +54,4 @@ class Keitaro:
         self.reports = Report(self.client)
         self.logs = Log(self.client)
         self.clicks = Click(self.client)
+        self.integrations = Integration(self.client)
