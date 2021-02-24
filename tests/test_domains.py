@@ -59,3 +59,4 @@ def test_restore(client):
     assert data[0]['id'] == deleted_domain['id']
     assert data[0]['name'] == deleted_domain['name']
     assert data[0]['state'] == 'active'
+    # TODO: refactor after implementing DEL methods for resources

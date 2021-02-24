@@ -1,4 +1,3 @@
-import json
 import random
 
 from keitaro.utils import generate_random_string

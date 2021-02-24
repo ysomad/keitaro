@@ -16,9 +16,9 @@ class Client:
         else:
             self.api_key = api_key
             self.host = host
-        self.api_url = self._build_api_uri()
+        self.api_url = self._build_api_url()
 
-    def _build_api_uri(self):
+    def _build_api_url(self):
         """Builds keitaro admin api URI"""
         if self.host.endswith('/'):
             api_url = self.host + Client.api_endpoint
@@ -29,12 +29,12 @@ class Client:
     def send_request(self, method, endpoint, **kwargs):
         """Sending HTTP request to URI endpoint"""
         url = self.api_url + endpoint
-        print(f'{method} {endpoint}')
+        print(f'{method} {url}')
         print(f'payload: {kwargs}')
         response = request(method, url, headers={'Api-Key': self.api_key},
                            **kwargs)
-        data = response.json()
-        print(f'response: {data}')
+        # data = response.json()
+        print(f'response: {response.json()}')
         return response
 
 

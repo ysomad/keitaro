@@ -1,5 +1,4 @@
 import random
-import json
 
 
 def test_get_all(client):

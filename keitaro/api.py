@@ -20,7 +20,7 @@ class API:
         """Removing none keys, values from query_params/payload"""
         return {key: val for key, val in query_params.items() if val}
 
-    def _prepare_request(self, method, *path_params, **query_params):
+    def _prepare_request(self, method, path_params, query_params):
         """Preparing http request before sending"""
         endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
         payload = self._build_payload(query_params)
@@ -28,13 +28,13 @@ class API:
             method, endpoint, data=json.dumps(payload))
 
     def get(self, *path_params, **query_params):
-        return self._prepare_request('GET', *path_params, **query_params)
+        return self._prepare_request('GET', path_params, query_params)
 
     def post(self, *path_params, **query_params):
-        return self._prepare_request('POST', *path_params, **query_params)
+        return self._prepare_request('POST', path_params, query_params)
 
     def put(self, *path_params, **query_params):
-        return self._prepare_request('PUT', *path_params, **query_params)
+        return self._prepare_request('PUT', path_params, query_params)
 
     def delete(self, *path_params, **query_params):
-        return self._prepare_request('DELETE', *path_params, **query_params)
+        return self._prepare_request('DELETE', path_params, query_params)

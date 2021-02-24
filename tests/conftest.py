@@ -1,7 +1,6 @@
 import os
 import random
 import string
-import json
 
 from keitaro import Keitaro
 import pytest
