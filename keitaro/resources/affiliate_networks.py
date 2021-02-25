@@ -22,3 +22,8 @@ class AffiliateNetwork(API):
         """Cloning affiliate network by id"""
         return super(AffiliateNetwork, self).post(
             affiliate_network_id, 'clone')
+
+    def update(self, affiliate_network_id, name=None, postback_url=None):
+        """Updating affiliate network"""
+        return super(AffiliateNetwork, self).put(
+            affiliate_network_id, name=name, postback_url=postback_url)
