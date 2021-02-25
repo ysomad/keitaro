@@ -1,5 +1,5 @@
 from keitaro.api import API
-from keitaro.utils import remove_key_values
+from keitaro.utils import remove_key_values, set_resource_default_fields
 
 
 class Stream(API):
@@ -52,3 +52,16 @@ class Stream(API):
     def restore(self, stream_id):
         """Restoring stream from archive"""
         return super(Stream, self).post(stream_id, 'restore')
+
+    def update(self, stream_id, *, campaign_id, name=None, type=None,
+               action_type=None, schema=None, position=None, weigth=None,
+               action_options=None, comments=None, state=None,
+               collect_clicks=None, filter_or=None, filters=None,
+               triggers=None, landings=None, offers=None):
+        """Updating stream data by stream_id in campaign with campaign_id"""
+        query_params = remove_key_values(locals())
+        streams = self.get(stream_id).json()
+        set_resource_default_fields(
+            {'action_type': action_type, 'schema': schema},
+            query_params, streams)
+        return super(Stream, self).post(**query_params)
