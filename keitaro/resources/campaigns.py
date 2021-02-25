@@ -61,3 +61,12 @@ class Campaign(API):
         query_params = remove_key_values(locals())
         return super(Campaign, self).post(
             campaign_id, 'update_costs', **query_params)
+
+    def update(self, campaign_id, *, name=None, alias=None, type=None,
+               state=None, cost_type=None, cookies_ttl=None, cost_value=None,
+               cost_currency=None, cost_auto=False, group_id=None, token=None,
+               traffic_source_id=None, bind_visitors=None, parameters=None,
+               domain_id=None, postbacks=None):
+        """Updating campaign data by campaign_id"""
+        return super(Campaign, self).put(
+            campaign_id, **remove_key_values(locals()))

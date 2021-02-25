@@ -114,3 +114,21 @@ def test_update_costs(client):
     data = resp.json()
     assert resp.status_code == 200
     assert data['success'] == True
+
+
+def test_update(client):
+    random_campaign = random.choice(client.campaigns.get().json())
+    new_name = 'Updated ' + random_campaign['name']
+    new_alias = f'{generate_random_string()}'
+    new_cost_auto = False
+    new_cost_value = 1337
+    resp = client.campaigns.update(
+        random_campaign['id'], name=new_name, alias=new_alias,
+        cost_auto=new_cost_auto, cost_value=new_cost_value)
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['id'] == random_campaign['id']
+    assert data['name'] == new_name
+    assert data['alias'] == new_alias
+    assert data['cost_auto'] == new_cost_auto
+    assert data['cost_value'] == new_cost_value
