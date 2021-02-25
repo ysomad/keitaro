@@ -14,3 +14,8 @@ class Group(API):
         """Creating new group with name and group_type"""
         return super(Group, self).post(
             name=name, type=group_type, position=position)
+
+    def update(self, group_id, name=None, position=None, group_type=None):
+        """Updates group data by group_id"""
+        return super(Group, self).put(
+            group_id, name=name, position=position, type=group_type)
