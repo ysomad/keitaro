@@ -11,8 +11,8 @@ class Client:
 
     def __init__(self, api_key, host, from_env=False):
         if from_env:
-            self.api_key = os.getenv(api_key)
-            self.host = os.getenv(host)
+            self.api_key = os.environ[api_key]
+            self.host = os.environ[host]
         else:
             self.api_key = api_key
             self.host = host
@@ -33,7 +33,7 @@ class Client:
         print(f'payload: {kwargs}')
         response = request(method, url, headers={'Api-Key': self.api_key},
                            **kwargs)
-        print(f'response: {response.text}')
+        print(f'response: {response.json()}')
         return response
 
 

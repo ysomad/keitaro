@@ -13,8 +13,9 @@ class API:
 
     def _build_payload(self, query_params):
         """Building and validating request payload"""
-        payload = self._remove_none_values_from_query_params(query_params)
-        return payload
+        if query_params:
+            payload = self._remove_none_values_from_query_params(query_params)
+            return payload
 
     def _remove_none_values_from_query_params(self, query_params):
         """Removing none keys, values from query_params/payload"""
