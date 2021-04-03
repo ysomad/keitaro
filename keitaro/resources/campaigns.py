@@ -3,7 +3,8 @@ import json
 from keitaro.api import API
 from keitaro.utils import (
     generate_random_string, remove_key_values,
-    filter_resource_entities_by_key_value)
+    filter_resource_entities_by_key_value
+)
 
 
 class Campaign(API):
@@ -35,6 +36,7 @@ class Campaign(API):
                domain_id=None, postbacks=None):
         """Creating new advertising campaign"""
         query_params = remove_key_values(locals())
+        # TODO: add only if doesn't exist
         query_params['alias'] = generate_random_string()
         return super(Campaign, self).post(**query_params)
 

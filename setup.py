@@ -17,11 +17,11 @@ setup(
     description='Unofficial Keitaro Admin API client',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/Infvmous/keitaro',
+    url='https://github.com/ysomad/keitaro',
     keywords='python python3 api-client requests api-wrapper keitaro keitaro-tracker',
     project_urls={
-        'Source Code': 'https://github.com/Infvmous/keitaropy/tree/master/keitaro',
-        'Documentation': 'https://github.com/Infvmous/keitaro#-getting-started',
+        'Source Code': 'https://github.com/ysomad/keitaropy/tree/master/keitaro',
+        'Documentation': 'https://github.com/ysomad/keitaro#-getting-started',
         'Keitaro Admin API Documentation': 'https://admin-api.docs.keitaro.io/'
     },
     classifiers=[

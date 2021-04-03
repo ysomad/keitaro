@@ -1,12 +1,10 @@
 import os
 
 from requests import request
-from .resources import (
-    AffiliateNetwork, Campaign, Offer, Stream, LandingPage, TrafficSource,
-    Domain, Group, User, BotList, Report, Log, Click, Integration)
+from .resources import *
 
 
-class Client:
+class Keitaro:
     api_endpoint = 'admin_api/v1/'
 
     def __init__(self, api_key, host, from_env=False):
@@ -35,22 +33,3 @@ class Client:
                            **kwargs)
         print(f'response: {response.json()}')
         return response
-
-
-class Keitaro:
-    def __init__(self, api_key, host, from_env=False):
-        self.client = Client(api_key, host, from_env)
-        self.affiliate_networks = AffiliateNetwork(self.client)
-        self.campaigns = Campaign(self.client)
-        self.offers = Offer(self.client)
-        self.streams = Stream(self.client)
-        self.landing_pages = LandingPage(self.client)
-        self.traffic_sources = TrafficSource(self.client)
-        self.domains = Domain(self.client)
-        self.groups = Group(self.client)
-        self.users = User(self.client)
-        self.botlist = BotList(self.client)
-        self.reports = Report(self.client)
-        self.logs = Log(self.client)
-        self.clicks = Click(self.client)
-        self.integrations = Integration(self.client)
