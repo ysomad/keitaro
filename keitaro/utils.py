@@ -1,6 +1,8 @@
 import random
 from string import ascii_letters, digits
 
+from varname import nameof
+
 
 def list_to_string(list_items, separator='\n'):
     """Converting list items to string with separator"""
@@ -33,3 +35,9 @@ def filter_resource_entities_by_key_value(resource_entities, key, value):
     if not found_dicts:
         raise KeyError(f'resource entities with {key} "{value}" not found')
     return found_dicts
+
+
+def set_resource_default_fields(args_to_set, query_params, resource_instances):
+    for key, value in args_to_set.items():
+        if value is None:
+            query_params[key] = resource_instances[key]

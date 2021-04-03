@@ -43,3 +43,17 @@ def test_clone(client):
     assert resp.status_code == 200
     assert isinstance(data, list)
     assert data[0]['name'] == f"Copy of {new_affiliate_network['name']}"
+
+
+def test_update(client):
+    random_aff = random.choice(client.affiliate_networks.get().json())
+    random_string = generate_random_string()
+    name = f'Updated name {random_string}'
+    postback_url = f'https://{random_string}.com'
+    resp = client.affiliate_networks.update(
+        random_aff['id'], name, postback_url)
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['id'] == random_aff['id']
+    assert data['name'] == name
+    assert data['postback_url'] == postback_url

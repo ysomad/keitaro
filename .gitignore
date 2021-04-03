@@ -3,8 +3,5 @@
 .vscode
 keitaro.egg-info
 env
-__main__.py
-__pycache__
-keitaro/__pycache__
-keitaro/resources/__pycache__
+__pycache__/
 setenv.sh

@@ -60,3 +60,19 @@ def test_restore(client):
     assert data[0]['name'] == deleted_domain['name']
     assert data[0]['state'] == 'active'
     # TODO: refactor after implementing DEL methods for resources
+
+
+def test_update(client):
+    random_domain = random.choice(client.domains.get().json())
+    random_string = generate_random_string().lower()
+    new_name = f'https://updated{random_string}.com'
+    state = 'disabled'
+    notes = f'updated domain {random_string}'
+    resp = client.domains.update(
+        random_domain['id'], name=new_name, state=state, notes=notes)
+    data = resp.json()
+    assert resp.status_code == 200
+    assert data['id'] == random_domain['id']
+    assert data['name'] == new_name
+    assert data['state'] == state
+    assert data['notes'] == notes

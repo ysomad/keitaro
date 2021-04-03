@@ -19,3 +19,7 @@ class BotList(API):
         """Remove IPs from the Bot List"""
         return super(BotList, self).post(
             'exclude', value=list_to_string(ip_list))
+
+    def update(self, ip_list):
+        """Replaces all botlist IPs with new ip_list"""
+        return super(BotList, self).put(value=list_to_string(ip_list))

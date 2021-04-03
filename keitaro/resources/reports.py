@@ -7,7 +7,22 @@ class Report(API):
         super(Report, self).__init__(client, endpoint)
 
     def get_labels(self, campaign_id, label_name, ref_name):
-        """ref_name = ip/source/ad_campaign_id/creative_id/
-        keyword/ad_campaign_idn/sub_id_1..10"""
-        return super(Report, self).get('labels', campaign_id=campaign_id,
+        """Getting reports labels"""
+        return super(Report, self).get(
+            'labels', campaign_id=campaign_id,
             label_name=label_name, ref_name=ref_name)
+
+    def build(self, interval, timezone,
+              metrics=['clicks', 'campaign_unique_clicks',
+                       'conversions', 'roi'], grouping=['campaign'],
+              sort={'name': 'clicks', 'order': 'DESC'}):
+        """Building custom keitaro report"""
+        return super(Report, self).post(
+            'build', range={'interval': interval, 'timezone': timezone},
+            metrics=metrics, grouping=grouping, sort=[sort])
+
+    def update_labels(self, campaign_id, ref_name, items):
+        """Update report labels"""
+        return super(Report, self).post(
+            'labels', campaign_id=campaign_id,
+            ref_name=ref_name, items={'value': items})
