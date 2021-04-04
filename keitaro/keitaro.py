@@ -1,7 +1,6 @@
 import os
 
 from requests import request
-from .resources import *
 
 
 class Keitaro:
@@ -19,9 +18,9 @@ class Keitaro:
     def _build_api_url(self):
         """Builds keitaro admin api URI"""
         if self.host.endswith('/'):
-            api_url = self.host + Client.api_endpoint
+            api_url = self.host + Keitaro.api_endpoint
         else:
-            api_url = f'{self.host}/{Client.api_endpoint}'
+            api_url = f'{self.host}/{Keitaro.api_endpoint}'
         return api_url
 
     def send_request(self, method, endpoint, **kwargs):
