@@ -1,8 +1,6 @@
 import random
 from string import ascii_letters, digits
 
-from varname import nameof
-
 
 def list_to_string(list_items, separator='\n'):
     """Converting list items to string with separator"""

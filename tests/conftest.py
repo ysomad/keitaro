@@ -14,8 +14,3 @@ def client():
 @pytest.fixture
 def env_client():
     return Keitaro('API_KEY', 'HOST', from_env=True)
-
-
-@pytest.fixture
-def random_affiliate_network(client):
-    return random.choice(client.affiliate_networks.get().json())
