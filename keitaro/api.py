@@ -1,29 +1,39 @@
 import json
 
 
+
 class API:
+    endpoint = 'admin_api/v1/'
 
-    def __init__(self, client, resource_endpoint):
+    def __init__(self, client, resource_path):
         self.client = client
-        self.resource_endpoint = resource_endpoint
+        self.resource_path = resource_path
 
-    def _build_endpoint(self, *path_params):
-        """Building URN path separated with slashes"""
+    @staticmethod
+    def build_request_url(*path_params) -> str:
+        """
+        Builds URL path separated with slashes
+        """
         return '/'.join(str(par).rstrip('/') for par in path_params if par)
 
-    def _build_payload(self, query_params):
-        """Building and validating request payload"""
-        if query_params:
-            payload = self._remove_none_values_from_query_params(query_params)
-            return payload
-
-    def _remove_none_values_from_query_params(self, query_params):
-        """Removing none keys, values from query_params/payload"""
+    def _query_params_remove_none_values(self, query_params: dict) -> dict:
+        """
+        Removes None keys and values from query parameters(payload)
+        """
         return {key: val for key, val in query_params.items() if val}
 
+    def _build_payload(self, query_params: dict) -> dict:
+        """
+        Builds and validates request payload
+        """
+        return self._query_params_remove_none_values(query_params)
+
     def prepare_request(self, method, *path_params, **query_params):
-        """Preparing http request before sending"""
-        endpoint = self._build_endpoint(self.resource_endpoint, *path_params)
+        """
+        Preparing http request for api call: building endpoint
+        and payload
+        """
+        url = API.build_request_url(
+            self.client.host, API.endpoint, self.resource_path, *path_params)
         payload = self._build_payload(query_params)
-        return self.client.send_request(
-            method, endpoint, data=json.dumps(payload))
+        return self.client.send_request(method, url, data=json.dumps(payload))

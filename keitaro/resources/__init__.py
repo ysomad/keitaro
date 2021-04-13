@@ -2,7 +2,7 @@ from .affiliate_networks import AffiliateNetwork
 from .campaigns import Campaign
 from .offers import Offer
 from .streams import Stream
-from .landing_pages import LandingPage
+from .landing_pages import Landing
 from .traffic_sources import TrafficSource
 from .domains import Domain
 from .groups import Group

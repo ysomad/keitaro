@@ -12,7 +12,7 @@ class Campaign(API):
     def __init__(self, client, endpoint='campaigns'):
         super(Campaign, self).__init__(client, endpoint)
 
-    def get(self, Integer campaign_id=None):
+    def get(self, campaign_id=None):
         """Getting all campaigns or specific one if
         campaign_id is not None"""
         return super(Campaign, self).prepare_request('GET', campaign_id)
