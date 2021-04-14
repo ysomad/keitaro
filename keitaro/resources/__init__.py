@@ -3,7 +3,7 @@ from .campaigns import Campaign
 from .offers import Offer
 from .streams import Stream
 from .landing_pages import Landing
-from .traffic_sources import TrafficSource
+from .traffic_sources import Source
 from .domains import Domain
 from .groups import Group
 from .users import User

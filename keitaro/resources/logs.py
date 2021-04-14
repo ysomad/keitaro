@@ -10,11 +10,10 @@ class Log(API):
         """
         Gets logs logs
         """
-        return super(Log, self).prepare_request(
-            'GET', logs_type, limit=limit, offset=offset, query=query)
+        return super(Log, self).get(logs_type, limit=limit, offset=offset, query=query)
 
     def types(self):
         """
         Getting logs types
         """
-        return super(Log, self).prepare_request('GET', 'types')
+        return super(Log, self).get('types')

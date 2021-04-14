@@ -10,8 +10,8 @@ class Report(API):
         """
         Gets reports labels
         """
-        return super(Report, self).prepare_request(
-            'GET', 'labels', campaign_id=campaign_id,
+        return super(Report, self).get(
+            labels', campaign_id=campaign_id,
             label_name=label_name, ref_name=ref_name)
 
     def build(
@@ -21,14 +21,14 @@ class Report(API):
         """
         Builds custom keitaro report
         """
-        return super(Report, self).prepare_request(
-            'POST', 'build', range={'interval': interval, 'timezone': timezone},
+        return super(Report, self).post(
+            'build', range={'interval': interval, 'timezone': timezone},
             metrics=metrics, grouping=grouping, sort=[sort])
 
     def update_labels(self, campaign_id, ref_name, items):
         """
         Updates report labels
         """
-        return super(Report, self).prepare_request(
-            'POST', 'labels', campaign_id=campaign_id,
+        return super(Report, self).post(
+            'labels', campaign_id=campaign_id,
             ref_name=ref_name, items={'value': items})

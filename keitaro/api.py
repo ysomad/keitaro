@@ -33,4 +33,17 @@ class API:
         """
         endpoint = API.build_url(self.resource_path, *path_params)
         payload = self._build_payload(query_params)
-        return self.client.send_request(method, endpoint, data=json.dumps(payload))
+        return self.client.send_request(
+            method, endpoint, data=json.dumps(payload))
+
+    def get(self, *path_params, **query_params):
+        return self.prepare_request('GET', *path_params, **query_params)
+
+    def post(self, *path_params, **query_params):
+        return self.prepare_request('POST', *path_params, **query_params)
+
+    def put(self, *path_params, **query_params):
+        return self.prepare_request('PUT', *path_params, **query_params)
+
+    def delete(self, *path_params, **query_params):
+        return self.prepare_request('DELETE', *path_params, **query_params)
