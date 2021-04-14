@@ -1,16 +1,14 @@
 import json
 
 
-
 class API:
-    endpoint = 'admin_api/v1/'
 
     def __init__(self, client, resource_path):
         self.client = client
         self.resource_path = resource_path
 
     @staticmethod
-    def build_request_url(*path_params) -> str:
+    def build_url(*path_params) -> str:
         """
         Builds URL path separated with slashes
         """
@@ -33,7 +31,6 @@ class API:
         Preparing http request for api call: building endpoint
         and payload
         """
-        url = API.build_request_url(
-            self.client.host, API.endpoint, self.resource_path, *path_params)
+        endpoint = API.build_url(self.resource_path, *path_params)
         payload = self._build_payload(query_params)
-        return self.client.send_request(method, url, data=json.dumps(payload))
+        return self.client.send_request(method, endpoint, data=json.dumps(payload))
