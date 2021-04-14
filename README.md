@@ -1,6 +1,6 @@
-# keitaropy
+# keitaro
 
-keitaropy is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
+keitaro is a simple and easy to use API wrapper library for [Keitaro](https://keitaro.io/) Admin API written in Python3 and [requests](https://pypi.org/project/requests/)
 
 ## 📄 Official Keitaro resources
 
