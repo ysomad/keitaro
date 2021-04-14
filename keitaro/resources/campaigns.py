@@ -13,20 +13,28 @@ class Campaign(API):
         super(Campaign, self).__init__(client, endpoint)
 
     def get(self, campaign_id=None):
-        """Getting all campaigns or specific one if
-        campaign_id is not None"""
-        return super(Campaign, self).prepare_request('GET', campaign_id)
+        """
+        Gets all campaigns or specific one if
+        campaign_id is not None
+        """
+        return super(Campaign, self).get(campaign_id)
 
     def get_deleted(self):
-        """Getting all deleted/archived campaigns"""
+        """
+        Gets all deleted/archived campaigns
+        """
         return super(Campaign, self).get('deleted')
 
     def get_streams(self, campaign_id):
-        """Gettings streams of campaign with campaign_id"""
+        """
+        Gets streams of campaign with campaign_id
+        """
         return super(Campaign, self).get(campaign_id, 'streams')
 
     def clone(self, campaign_id):
-        """Cloning campaign by its campaign_id"""
+        """
+        Clones campaign by its campaign_id
+        """
         return super(Campaign, self).post(campaign_id)
 
     def create(self, name, *, alias=None, type=None,
@@ -34,32 +42,44 @@ class Campaign(API):
                cost_currency=None, cost_auto=False, group_id=None, token=None,
                traffic_source_id=None, bind_visitors=None, parameters=None,
                domain_id=None, postbacks=None):
-        """Creating new advertising campaign"""
+        """
+        Creates new advertising campaign
+        """
         query_params = remove_key_values(locals())
         # TODO: add only if doesn't exist
         query_params['alias'] = generate_random_string()
         return super(Campaign, self).post(**query_params)
 
     def disable(self, campaign_id):
-        """Changing state of campaign to disabled"""
+        """
+        Changes state of campaign to disabled
+        """
         return super(Campaign, self).post(campaign_id, 'disable')
 
     def get_by_name(self, name):
-        """Returns list of found campaigns by name"""
+        """
+        Returns list of found campaigns by name
+        """
         return filter_resource_entities_by_key_value(
             self.get().json(), 'name', name)
 
     def enable(self, campaign_id):
-        """Changing state of campaign to active"""
+        """
+        Changes state of campaign to active
+        """
         return super(Campaign, self).post(campaign_id, 'enable')
 
     def restore(self, campaign_id):
-        """Restoring campaign from archive"""
+        """
+        Restores campaign from archive
+        """
         return super(Campaign, self).post(campaign_id, 'restore')
 
     def update_costs(self, campaign_id, *, start_date, end_date, timezone,
                      cost, currency, only_campaign_uniques=None, filters=None):
-        """Updating campaign costs"""
+        """
+        Updates campaign costs
+        """
         query_params = remove_key_values(locals())
         return super(Campaign, self).post(
             campaign_id, 'update_costs', **query_params)
@@ -69,6 +89,8 @@ class Campaign(API):
                cost_currency=None, cost_auto=False, group_id=None, token=None,
                traffic_source_id=None, bind_visitors=None, parameters=None,
                domain_id=None, postbacks=None):
-        """Updating campaign data by campaign_id"""
+        """
+        Updates campaign data by campaign_id
+        """
         return super(Campaign, self).put(
             campaign_id, **remove_key_values(locals()))

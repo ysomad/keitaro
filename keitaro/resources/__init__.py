@@ -1,4 +1,4 @@
-from .affiliate_networks import AffiliateNetwork
+from .affiliate_networks import Affiliate
 from .campaigns import Campaign
 from .offers import Offer
 from .streams import Stream
