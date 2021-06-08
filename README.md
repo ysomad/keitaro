@@ -8,13 +8,6 @@ keitaro is a simple and easy to use API wrapper library for [Keitaro](https://ke
 -   [Admin API documentation](https://admin-api.docs.keitaro.io/)
 -   [Technical Support](https://t.me/keitarobot)
 
-## ❔ Why should you use keitaropy
-
--   allows to use multiple trackers in one solution
--   no need knowledge of http requests
--   incredibly easy to use
--   follows the paradigm "write once, run everywhere" - don't need to write multiple POST requests for example if you want to call API
-
 ## 📖 Getting Started
 
 ### Installation
