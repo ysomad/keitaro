@@ -12,11 +12,7 @@ keitaro is a simple and easy to use API wrapper library for [Keitaro](https://ke
 
 ### Installation
 
-To install you need to have [pip](https://pip.pypa.io/en/stable/installing/) installed
-
-```
-pip install keitaropy
-```
+Pypi package is not updated, you can build it using setup.py
 
 ### Keitaro tracker initialization
 
