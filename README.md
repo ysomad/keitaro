@@ -33,7 +33,6 @@ All keitaropy functionality is presented in [Google Sheet](https://docs.google.c
 If API request was successful, status code 200 will be received and a response in the json format. `Use json()` method to see the response data
 
 ```python
-import json
 from keitaropy import Keitaro
 
 api = Keitaro('API key', 'URL')
